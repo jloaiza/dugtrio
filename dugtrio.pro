@@ -1,6 +1,8 @@
 
-TEMPLATE = app
-CONFIG -= qt
+TEMPLATE = subdirs
 
-TARGET += dugtrio
-SOURCES += main.cpp
+
+SUBDIRS += \
+    src/xml \
+    dugtrio \
+    ui

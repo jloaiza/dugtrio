@@ -1,0 +1,4 @@
+
+
+INCLUDEPATH     +=  . ..
+WARNINGS        +=  -Wall
