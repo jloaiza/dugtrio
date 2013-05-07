@@ -3,5 +3,12 @@ CONFIG          +=      console
 CONFIG          -=      app_bundle
 CONFIG          -=      qt
 
-SOURCES         +=      main.cpp
+SOURCES         += \     
+    dugtrio.cpp \
+    LSS/lss.cpp \
+    LSS/lssmanager.cpp
+
+HEADERS += \
+    LSS/lss.h \
+    LSS/lssmanager.h
 
