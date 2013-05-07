@@ -3,6 +3,7 @@ TEMPLATE = subdirs
 
 
 SUBDIRS += \
-    src/xml \
+    xml \
     dugtrio \
-    ui
+    ui \
+    md5
