@@ -8,17 +8,17 @@
 
 NetworkHandler::NetworkHandler()
 {
-    _sizeAddr = 0;
-    _run = 1;
-    _indicatorMessage = 0;
-    _serverSocket = socket(AF_INET, SOCK_STREAM, 0);
-    _serverIP.sin_family = AF_INET ;
-    _serverIP.sin_port = htons(PORT);
-    _serverIP.sin_addr.s_addr = INADDR_ANY ;
-    _sizeAddr = sizeof(struct sockaddr_in);
+    _sizeAddr                   = 0;
+    _run                        = 1;
+    _indicatorMessage           = 0;
+    _serverSocket               = socket(AF_INET, SOCK_STREAM, 0);
+    _serverIP.sin_family        = AF_INET ;
+    _serverIP.sin_port          = htons(PORT);
+    _serverIP.sin_addr.s_addr   = INADDR_ANY ;
+    _sizeAddr                   = sizeof(struct sockaddr_in);
 }
 
-int NetworkHandler::MeetClient(int pSocket, sockaddr_in pIP)
+int NetworkHandler::meetClient(int pSocket, sockaddr_in pIP)
 {
     int run = 0; /* Verificador del ciclo. */   
     int exitcode = 0; /* Código de salida por defecto */         
@@ -30,7 +30,7 @@ int NetworkHandler::MeetClient(int pSocket, sockaddr_in pIP)
         /* Recivimos la información y al mismo tiempo evaluamos si llego correctamente. */
         if ((_byteCount = recv(pSocket, _inBuffer, BUFFERSIZE, 0))== -1)
         {
-            Error(5, "No se pudo recibir la información.");
+            error(5, "No se pudo recibir la información.");
         }
         /* Se convierte el _inBuffer de char a string para un manejo más fácil. */
         std::string inMessageBuffer = _inBuffer;
@@ -56,8 +56,8 @@ int NetworkHandler::MeetClient(int pSocket, sockaddr_in pIP)
             inMessage(inMessageBuffer, pSocket);
         }
     }
-    close(pSocket); /* Se cierra la conexión del cliente. */
-    return exitcode; /* Retorna el codigo de salida */
+    close(pSocket);
+    return exitcode;
 }
 
 /**
@@ -72,7 +72,7 @@ void NetworkHandler::outMessage(std::string pMessage, int pSocket)
     sprintf(_inBuffer, pMessageOut); 
     if((_byteCount = send(pSocket, _inBuffer, strlen(_inBuffer), 0))== -1)
     {
-        Error(6, "No se pudo enviar la información.");
+        error(6, "No se pudo enviar la información.");
     }
 }
 
@@ -82,7 +82,7 @@ void NetworkHandler::outMessage(std::string pMessage, int pSocket)
  * @param pSpecification: Corresponde a la especificación del error anterior.
  */
 
-void NetworkHandler::Error(int pCode, std::string pSpecification)
+void NetworkHandler::error(int pCode, std::string pSpecification)
 {
     std::cout << "Error con codigo: " << pCode << " | " << " Especificación: " << pSpecification << std::endl;
     exit(1);
@@ -93,7 +93,7 @@ void NetworkHandler::Error(int pCode, std::string pSpecification)
  * @param pLoop: Mensaje de esperando conexión.
  */
 
-void NetworkHandler::WaitConnectionMsg(int pLoop)
+void NetworkHandler::waitConnectionMsg(int pLoop)
 {
     if (pLoop == 0)
     {
@@ -110,17 +110,17 @@ void NetworkHandler::verifyLiftErrors()
 {
     if (_serverSocket == -1)
     {
-        Error(1, "No se puede inicializar el socket.");
+        error(1, "No se puede inicializar el socket.");
     }
     
     if (bind( _serverSocket, (struct sockaddr*) &_serverIP, sizeof(_serverIP) ) == -1)
     {
-        Error(2, "El puerto está en uso."); 
+        error(2, "El puerto está en uso.");
     }
 
     if (listen( _serverSocket, 10) == -1 )
     {
-        Error(3, "No se puede escuchar en el puerto especificado, ya está siendo usado");
+        error(3, "No se puede escuchar en el puerto especificado, ya está siendo usado");
     } 
 }
 
@@ -144,11 +144,11 @@ void NetworkHandler::verifyNewClient()
             {
                 case -1:  
                     /* Error al crear el nuevo cliente.*/
-                    Error(4, "No se puede crear un nuevo cliente.");
+                    error(4, "No se puede crear un nuevo cliente.");
                     break;
                 case 0:   
                     /* Somos un nuevo cliente. */                           
-                    _exit = MeetClient(_clientSocket, _clientIP);
+                    _exit = meetClient(_clientSocket, _clientIP);
                     /* Se libera el cliente. */
                     exit(_exit); 
                 default:  
@@ -195,7 +195,7 @@ void NetworkHandler::verifyDeadClient()
  * Ciclo que mantiene el servidor corriendo a la espera de conexiones.
  */
 
-void NetworkHandler::Run()
+void NetworkHandler::run()
 {  
     /* Se verifican los errores principales antes de levantar el servidor. */
     verifyLiftErrors();
@@ -204,7 +204,7 @@ void NetworkHandler::Run()
     {
         /* Imprime que se esta esperando alguna conexión. */
         
-        WaitConnectionMsg(_indicatorMessage);
+        waitConnectionMsg(_indicatorMessage);
         
         /* Se carga el valor de rfdsn (Utilizados para la conexión) */
         

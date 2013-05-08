@@ -61,6 +61,6 @@ public:
      * @param pStartBlock
      */
     void erase(int pStartBlock);
-}
+};
 
 #endif // LSS_H

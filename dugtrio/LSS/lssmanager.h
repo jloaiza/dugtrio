@@ -10,7 +10,8 @@
 #include "lss.h"
 
 /** TODO: check that this fordward declaration will correctly work **/
-class DoubleLinkedList;
+template <class LLS>
+class DoubleLinkedList<LLS>;
 class LSSNetworkHandler;
 class LSSConsole;
 class LSSOperations;

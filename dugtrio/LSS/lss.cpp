@@ -1,5 +1,6 @@
+
 #include "lss.h"
 
-LSS::LSS()
-{
+LSS::LSS(){
+
 }
