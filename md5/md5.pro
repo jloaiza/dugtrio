@@ -9,3 +9,4 @@ SOURCES         += \
 
 HEADERS += \
     md5.h \
+    constants.h
