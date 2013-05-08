@@ -18,6 +18,13 @@ class LSSOperations;
 class LSSManager{
 
 private:
+
+    /**
+     * @brief _lssList
+     * @brief _networkHandler
+     * @brief _console
+     * @brief _logic
+     */
     DoubleLinkedList<LSS>*  _lssList;
     LSSNetworkHandler*      _networkHandler;
     LSSConsole*             _console;
@@ -25,6 +32,10 @@ private:
 
 
 public:
+
+    /**
+     * @brief LSSManager
+     */
     LSSManager();
 
     /** TODO:start, getters, setters **/
