@@ -6,4 +6,5 @@ SUBDIRS += \
     xml \
     dugtrio \
     ui \
-    md5
+    md5 \
+    networkhandler \
