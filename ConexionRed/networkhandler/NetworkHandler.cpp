@@ -1,5 +1,15 @@
+/**
+*************************************************************
+* @file: Servidor.CPP
+* @brief: Creando un server TCP usando Threads!!!!
+* @author Yeison Arturo Cruz León :)
+* @Universidad: Instituto Tecnológico de Costa Rica.
+* @Carnet: 201258348.
+* @date 06/07/08 de mayo del 2013
+************************************************************
+*/
 
-#include "networkhandler.h"
+#include "NetworkHandler.h"
 
 /**
  * Constructor del servidor, inicializa todas las variables necesarias para
@@ -8,17 +18,17 @@
 
 NetworkHandler::NetworkHandler()
 {
-    _sizeAddr                   = 0;
-    _run                        = 1;
-    _indicatorMessage           = 0;
-    _serverSocket               = socket(AF_INET, SOCK_STREAM, 0);
-    _serverIP.sin_family        = AF_INET ;
-    _serverIP.sin_port          = htons(PORT);
-    _serverIP.sin_addr.s_addr   = INADDR_ANY ;
-    _sizeAddr                   = sizeof(struct sockaddr_in);
+    _sizeAddr = 0;
+    _run = 1;
+    _indicatorMessage = 0;
+    _serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    _serverIP.sin_family = AF_INET ;
+    _serverIP.sin_port = htons(PORT);
+    _serverIP.sin_addr.s_addr = INADDR_ANY ;
+    _sizeAddr = sizeof(struct sockaddr_in);
 }
 
-int NetworkHandler::meetClient(int pSocket, sockaddr_in pIP)
+int NetworkHandler::MeetClient(int pSocket, sockaddr_in pIP)
 {
     int run = 0; /* Verificador del ciclo. */   
     int exitcode = 0; /* Código de salida por defecto */         
@@ -30,7 +40,12 @@ int NetworkHandler::meetClient(int pSocket, sockaddr_in pIP)
         /* Recivimos la información y al mismo tiempo evaluamos si llego correctamente. */
         if ((_byteCount = recv(pSocket, _inBuffer, BUFFERSIZE, 0))== -1)
         {
-            error(5, "No se pudo recibir la información.");
+            Error(5, "No se pudo recibir la información.");
+        }
+        if(_byteCount == 0)
+        {
+            std::cout << "!ATENCIÓN! El cliente " << inet_ntoa(_clientIP.sin_addr) <<  " se ha desconectado inesperadamente, conexión perdida." << std::endl;
+            run = 1;
         }
         /* Se convierte el _inBuffer de char a string para un manejo más fácil. */
         std::string inMessageBuffer = _inBuffer;
@@ -56,8 +71,8 @@ int NetworkHandler::meetClient(int pSocket, sockaddr_in pIP)
             inMessage(inMessageBuffer, pSocket);
         }
     }
-    close(pSocket);
-    return exitcode;
+    close(pSocket); /* Se cierra la conexión del cliente. */
+    return exitcode; /* Retorna el codigo de salida */
 }
 
 /**
@@ -72,7 +87,7 @@ void NetworkHandler::outMessage(std::string pMessage, int pSocket)
     sprintf(_inBuffer, pMessageOut); 
     if((_byteCount = send(pSocket, _inBuffer, strlen(_inBuffer), 0))== -1)
     {
-        error(6, "No se pudo enviar la información.");
+        Error(6, "No se pudo enviar la información.");
     }
 }
 
@@ -82,7 +97,7 @@ void NetworkHandler::outMessage(std::string pMessage, int pSocket)
  * @param pSpecification: Corresponde a la especificación del error anterior.
  */
 
-void NetworkHandler::error(int pCode, std::string pSpecification)
+void NetworkHandler::Error(int pCode, std::string pSpecification)
 {
     std::cout << "Error con codigo: " << pCode << " | " << " Especificación: " << pSpecification << std::endl;
     exit(1);
@@ -93,7 +108,7 @@ void NetworkHandler::error(int pCode, std::string pSpecification)
  * @param pLoop: Mensaje de esperando conexión.
  */
 
-void NetworkHandler::waitConnectionMsg(int pLoop)
+void NetworkHandler::WaitConnectionMsg(int pLoop)
 {
     if (pLoop == 0)
     {
@@ -110,17 +125,17 @@ void NetworkHandler::verifyLiftErrors()
 {
     if (_serverSocket == -1)
     {
-        error(1, "No se puede inicializar el socket.");
+        Error(1, "No se puede inicializar el socket.");
     }
     
     if (bind( _serverSocket, (struct sockaddr*) &_serverIP, sizeof(_serverIP) ) == -1)
     {
-        error(2, "El puerto está en uso.");
+        Error(2, "El puerto está en uso."); 
     }
 
     if (listen( _serverSocket, 10) == -1 )
     {
-        error(3, "No se puede escuchar en el puerto especificado, ya está siendo usado");
+        Error(3, "No se puede escuchar en el puerto especificado, ya está siendo usado");
     } 
 }
 
@@ -144,11 +159,11 @@ void NetworkHandler::verifyNewClient()
             {
                 case -1:  
                     /* Error al crear el nuevo cliente.*/
-                    error(4, "No se puede crear un nuevo cliente.");
+                    Error(4, "No se puede crear un nuevo cliente.");
                     break;
                 case 0:   
                     /* Somos un nuevo cliente. */                           
-                    _exit = meetClient(_clientSocket, _clientIP);
+                    _exit = MeetClient(_clientSocket, _clientIP);
                     /* Se libera el cliente. */
                     exit(_exit); 
                 default:  
@@ -195,7 +210,7 @@ void NetworkHandler::verifyDeadClient()
  * Ciclo que mantiene el servidor corriendo a la espera de conexiones.
  */
 
-void NetworkHandler::run()
+void NetworkHandler::Run()
 {  
     /* Se verifican los errores principales antes de levantar el servidor. */
     verifyLiftErrors();
@@ -204,7 +219,7 @@ void NetworkHandler::run()
     {
         /* Imprime que se esta esperando alguna conexión. */
         
-        waitConnectionMsg(_indicatorMessage);
+        WaitConnectionMsg(_indicatorMessage);
         
         /* Se carga el valor de rfdsn (Utilizados para la conexión) */
         
