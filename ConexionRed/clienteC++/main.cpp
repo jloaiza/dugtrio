@@ -1,13 +1,3 @@
-/**
-*************************************************************
-* @file: main.CPP
-* @brief: Creando un cliente TCP!!!!
-* @author Yeison Arturo Cruz León :)
-* @Universidad: Instituto Tecnológico de Costa Rica.
-* @Carnet: 201258348.
-* @date 10 de mayo del 2013
-************************************************************
-*/
 
 #include <cstdlib>
 #include "Client.h"

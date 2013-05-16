@@ -1,13 +1,3 @@
-/**
-*************************************************************
-* @file: Servidor.h
-* @brief: Creando un server TCP usando Threads!!!!
-* @author Yeison Arturo Cruz León :)
-* @Universidad: Instituto Tecnológico de Costa Rica.
-* @Carnet: 201258348.
-* @date 06/07/08 de mayo del 2013
-************************************************************
-*/
 
 #include <fcntl.h>
 #include <string>
@@ -34,19 +24,57 @@
 class NetworkHandler
 {
     public:  
-        /* Todos los metodos ya fueron documentados en el CPP.*/
+        /**
+        * Constructor del servidor, inicializa todas las variables necesarias para
+        * que el servidor funcione correctamente.
+        */
         NetworkHandler(); 
-        virtual void inMessage(std::string pMessage, int pSocket) = 0;
+        /**
+         * Método que se implementará dentro de cualquier clase que herede.
+         * @param pMessage: Mensaje entrante desde el socket.
+         * @param pSocket: Desde donde llega el mensaje.
+         */
+        virtual void inMessage(std::string pMessage, int pSocket) = 0;     
+        /**
+         * 
+         * @param pMessage: Corresponde al mensaje que será enviado hacia el cliente.
+         * @param pSocket: Corresponde al socket por el cual será enviado el mensaje.
+         */
         void outMessage(std::string pMessage, int pSocket);
+        /**
+        * Ciclo que mantiene el servidor corriendo a la espera de conexiones.
+        */
         void Run(); 
     private:
+        /**
+        * @param pLoop: Mensaje de esperando conexión.
+        */
         void WaitConnectionMsg(int pLoop);
+        /**
+        * Errores que se verifican antes de levantar el servidor, previendo posibles altercados.
+        */
         void verifyLiftErrors();
+        /**
+        * 
+        * @param pCode: Corresponde al código de error de algun error X.
+        * @param pSpecification: Corresponde a la especificación del error anterior.
+        */
         void Error(int pCode, std::string pSpecification);
+        /**
+         * Método que antiende cada cliente que llega.
+         * @param pSocket
+         * @param pIP
+         * @return 
+         */
         int MeetClient(int pSocket, struct sockaddr_in pIP);
+        /**
+        * Verificar si hay algun nuevo cliente ingresando al servidor.
+        */
         void verifyNewClient();
+        /**
+        * Verificar si algun cliente ha pedido la desconección.
+        */
         void verifyDeadClient(); 
-        void verifyLostClient();
 
         /* Conjunto de parametros de red a vigilar */
 
