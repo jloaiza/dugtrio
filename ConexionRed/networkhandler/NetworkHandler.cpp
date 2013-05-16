@@ -1,20 +1,5 @@
-/**
-*************************************************************
-* @file: Servidor.CPP
-* @brief: Creando un server TCP usando Threads!!!!
-* @author Yeison Arturo Cruz León :)
-* @Universidad: Instituto Tecnológico de Costa Rica.
-* @Carnet: 201258348.
-* @date 06/07/08 de mayo del 2013
-************************************************************
-*/
 
 #include "NetworkHandler.h"
-
-/**
- * Constructor del servidor, inicializa todas las variables necesarias para
- * que el servidor funcione correctamente.
- */
 
 NetworkHandler::NetworkHandler()
 {
@@ -75,11 +60,6 @@ int NetworkHandler::MeetClient(int pSocket, sockaddr_in pIP)
     return exitcode; /* Retorna el codigo de salida */
 }
 
-/**
- * 
- * @param pMessage: Corresponde al mensaje que será enviado hacia el cliente.
- * @param pSocket: Corresponde al socket por el cual será enviado el mensaje.
- */
 void NetworkHandler::outMessage(std::string pMessage, int pSocket)
 {
     const char *pMessageOut = pMessage.c_str();
@@ -91,22 +71,11 @@ void NetworkHandler::outMessage(std::string pMessage, int pSocket)
     }
 }
 
-/**
- * 
- * @param pCode: Corresponde al código de error de algun error X.
- * @param pSpecification: Corresponde a la especificación del error anterior.
- */
-
 void NetworkHandler::Error(int pCode, std::string pSpecification)
 {
     std::cout << "Error con codigo: " << pCode << " | " << " Especificación: " << pSpecification << std::endl;
     exit(1);
 }
-
-/**
- * 
- * @param pLoop: Mensaje de esperando conexión.
- */
 
 void NetworkHandler::WaitConnectionMsg(int pLoop)
 {
@@ -116,10 +85,6 @@ void NetworkHandler::WaitConnectionMsg(int pLoop)
         _indicatorMessage++;
     }
 }
-
-/**
- * Errores que se verifican antes de levantar el servidor, previendo posibles altercados.
- */
 
 void NetworkHandler::verifyLiftErrors()
 {
@@ -138,10 +103,6 @@ void NetworkHandler::verifyLiftErrors()
         Error(3, "No se puede escuchar en el puerto especificado, ya está siendo usado");
     } 
 }
-
-/**
- * Verificar si hay algun nuevo cliente ingresando al servidor.
- */
 
 void NetworkHandler::verifyNewClient()
 {
@@ -179,10 +140,6 @@ void NetworkHandler::verifyNewClient()
     } 
 }
 
-/**
- * Verificar si algun cliente ha pedido la desconección.
- */
-
 void NetworkHandler::verifyDeadClient()
 {
     /* Miramos si se ha cerrado algún cliente últimamente. */
@@ -205,10 +162,6 @@ void NetworkHandler::verifyDeadClient()
         _indicatorMessage = 0;
     }  
 }
-
-/**
- * Ciclo que mantiene el servidor corriendo a la espera de conexiones.
- */
 
 void NetworkHandler::Run()
 {  

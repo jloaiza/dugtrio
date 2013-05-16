@@ -1,13 +1,3 @@
-/**
-*************************************************************
-* @file: Client.h
-* @brief: Creando un cliente TCP!!!!
-* @author Yeison Arturo Cruz León :)
-* @Universidad: Instituto Tecnológico de Costa Rica.
-* @Carnet: 201258348.
-* @date 10 de mayo del 2013
-************************************************************
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,14 +18,41 @@
 class Client 
 {
     public:
-        /* Todos los métodos ya fueron documentados en el CPP*/
+        /**
+        * Constructor de la clase, llama a los métodos para iniciar la conexión.
+        * @param pIp: Ip a la cual se quiere conectar.
+        * @param pPort: Puerto por el cual se quiere conectar.
+        */
         Client(std::string pIp, int pPort);
+        /**
+        * Muestra errores que se puedan dar al realizar las conexiones.
+        * @param pError: Recive la especificación del error.
+        */
         void Error(std::string pError);
+        /**
+        * Método que se encarga de abrir el socket para poder trabajar con las conexiones.
+        */
         void openSocket();
+        /**
+        * Método que se encarga de setear las variables principales del socket
+        * para poder realizar uan conexión exitosa.
+        */
         void setSocket();
+        /**
+        * Método que conecta hacia la IP dada al instanciar la clase junto con su puerto.
+        */
         void Connect();
+        /**
+        * Se encarga de enviar un mensaje hacia la IP dada al construir la clase, 
+        * llamese mensaje a un string con algúna instrucción.
+        * @param pMessage: El comando o la instrucción a enviar por la red.
+        */
         void sendMessage(std::string pMessage);
-        char* readMessage();
+        /**
+        * Método que se encarga de leer desde el socket todo lo recivido al enviar algún
+        * comando por medio de la red, es decir, la respuesta del servidor.
+        */
+        std::string readMessage();
         
     private:
         /* Getters y setters para el puerto y la IP. */
