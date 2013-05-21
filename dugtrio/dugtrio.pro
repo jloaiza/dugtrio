@@ -12,7 +12,9 @@ SOURCES         += \
 HEADERS += \
     LSS/lss.h \
     LSS/lssmanager.h \
-    LSS/lssxml.h
+    LSS/lssxml.h \
+    observer.h \
+    observable.h
 
 OTHER_FILES += \
     LSS/lssconfig.xml
