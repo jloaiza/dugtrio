@@ -11,7 +11,11 @@ SOURCES         += \
     LSS/regsisterspace.cpp \
     LSS/registerbuffer.cpp \
     structures/ntree.cpp \
-    structures/ntreenode.cpp
+    structures/ntreenode.cpp \
+    LSS/testerlss.cpp \
+    LSS/lssoperations.cpp \
+    LSS/lssmain.cpp \
+    LSS/lssdirection.cpp
 
 HEADERS += \
     LSS/lss.h \
@@ -22,8 +26,11 @@ HEADERS += \
     LSS/regsisterspace.h \
     LSS/registerbuffer.h \
     structures/ntree.h \
-    structures/ntreenode.h
+    structures/ntreenode.h \
+    LSS/lssoperations.h \
+    LSS/info.h
 
 OTHER_FILES += \
-    LSS/lssconfig.xml
+    LSS/lssconfig.xml \
+    LSS/disk1
 

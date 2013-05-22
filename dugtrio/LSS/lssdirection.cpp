@@ -1,5 +1,5 @@
 /*
- * lss.h
+ * lssDirection.cpp
  * 
  * Copyright 2013 maikol <maikol@maikol-wander-15>
  * 
@@ -17,29 +17,17 @@
  */
 
 
-#ifndef LSS
-#define LSS
+#ifndef LSSDIRECTION
+#define LSSDIRECTION
 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-
-class lss {
-	
-private:
-
-	const char * _disk;
-	bool _busy;
-	char _id;
-	int _size;
-	int _blockSize;
-			
+class lssDirection {
+		
 public:
-	
-	lss(const char *  pDisk, short pID, int pSize, int pBlockSize);
-	void write(char* pText, int pBlock);
-	char * read(int pBlock);
+
+	short * _IP;		// 8 bytes
+	short * _ID;		// 2 bytes
+	short * _block;		// 2 bytes
 	
 };
 
-#endif //LSS
+#endif //LSSMANAGER
