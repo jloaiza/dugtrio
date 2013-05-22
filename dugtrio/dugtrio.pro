@@ -10,7 +10,8 @@ SOURCES         += \
     LSS/lssxml.cpp \
     LSS/regsisterspace.cpp \
     LSS/registerbuffer.cpp \
-    structures/ntree.cpp
+    structures/ntree.cpp \
+    structures/ntreenode.cpp
 
 HEADERS += \
     LSS/lss.h \
@@ -20,7 +21,8 @@ HEADERS += \
     observable.h \
     LSS/regsisterspace.h \
     LSS/registerbuffer.h \
-    structures/ntree.h
+    structures/ntree.h \
+    structures/ntreenode.h
 
 OTHER_FILES += \
     LSS/lssconfig.xml
