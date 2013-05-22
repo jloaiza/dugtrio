@@ -15,7 +15,11 @@ SOURCES         += \
     LSS/testerlss.cpp \
     LSS/lssoperations.cpp \
     LSS/lssmain.cpp \
-    LSS/lssdirection.cpp
+    LSS/lssdirection.cpp \
+    structures/simplelist.cpp \
+    structures/numero.cpp \
+    structures/node.cpp \
+    structures/lstester.cpp
 
 HEADERS += \
     LSS/lss.h \
@@ -28,7 +32,11 @@ HEADERS += \
     structures/ntree.h \
     structures/ntreenode.h \
     LSS/lssoperations.h \
-    LSS/info.h
+    LSS/info.h \
+    structures/simplelist.h \
+    structures/numero.h \
+    structures/node.h \
+    structures/ifile.h
 
 OTHER_FILES += \
     LSS/lssconfig.xml \
