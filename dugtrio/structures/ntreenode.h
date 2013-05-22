@@ -30,12 +30,41 @@ private:
 	
 public:
 
+    /**
+     * @brief nTreeNode
+     * @param pFile
+     * @param pName
+     */
 	nTreeNode (iFile* pFile, string pName);
 	
+    /**
+     * @brief addChild
+     * @param pNode
+     */
 	void addChild(nTreeNode * pNode);
+
+    /**
+     * @brief getChild
+     * @return
+     */
 	nTreeNode getChild();
+
+    /**
+     * @brief searchChild
+     * @param pName
+     * @return
+     */
 	bool searchChild(string pName);
+
+    /**
+     * @brief eraseChild
+     * @param pName
+     */
 	void eraseChild(string pName);
+
+    /**
+     * @brief print
+     */
 	void print();
 	
 };
