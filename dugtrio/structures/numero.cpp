@@ -24,44 +24,26 @@
 #include "numero.h"
 #include <iostream>
 
-<<<<<<< HEAD
-numero::numero(int pData) 
-=======
-numero::numero (int pData) 
->>>>>>> fd044aceca801fa546b3952cdcbf83d6919d799e
+
+numero::numero (int pData)
 { 
 	_data = pData; 
 }
 
-<<<<<<< HEAD
-numero::numero() 
-{ 
+numero::numero() { }
 
-}
 
-=======
->>>>>>> fd044aceca801fa546b3952cdcbf83d6919d799e
 bool numero::mayor(numero pData) 
 { 
 	return _data > pData._data;
 }
 	
-<<<<<<< HEAD
-bool numero::eql(numero pData)
-=======
 bool numero::eql (numero pData)
->>>>>>> fd044aceca801fa546b3952cdcbf83d6919d799e
 { 
 	return _data == pData._data;
 }
 
-<<<<<<< HEAD
 void numero::print() 
 { 
 	std::cout << _data << " - "; 
-=======
-void numero::print () 
-{ 
-	std::cout << _data; 
->>>>>>> fd044aceca801fa546b3952cdcbf83d6919d799e
 }

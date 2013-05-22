@@ -28,14 +28,10 @@ class numero
 {
 
 public:
-<<<<<<< HEAD
 
 	numero(int pData);
 	numero();
 	
-=======
-	numero (int pData);
->>>>>>> fd044aceca801fa546b3952cdcbf83d6919d799e
 	int _data;
 	bool mayor(numero pData);
 	bool eql (numero pData);

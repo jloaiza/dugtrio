@@ -17,7 +17,7 @@
  */
 
 #include <iostream>
-#include "simpleList.h"
+#include "simplelist.h"
 
 template <class T>
 simpleList<T>::simpleList() 
