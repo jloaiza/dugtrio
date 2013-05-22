@@ -28,7 +28,10 @@ class numero
 {
 
 public:
-	numero (int pData);
+
+	numero(int pData);
+	numero();
+	
 	int _data;
 	bool mayor(numero pData);
 	bool eql (numero pData);

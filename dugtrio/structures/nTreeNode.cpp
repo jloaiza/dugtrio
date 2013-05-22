@@ -1,7 +1,7 @@
 /*
- * numero.cpp
+ * nTreeNode.cpp
  * 
- * Copyright 2013 maikol barrantes <maikol@maikol-wander-15>
+ * Copyright 2013 201230364 Maikol Barrantes Garcia <mibarrantes@TM-OP>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,29 +21,38 @@
  * 
  */
 
-#include "numero.h"
-#include <iostream>
 
+#include "nTreeNode.h";
 
-numero::numero (int pData)
-{ 
-	_data = pData; 
+nTreeNode::nTreeNode(iFile* pFile, string pName)
+{
+	_File = pFile;
+	_childs = new listasimple<nTreeNode>;
+	_name = pName;
 }
 
-numero::numero() { }
-
-
-bool numero::mayor(numero pData) 
-{ 
-	return _data > pData._data;
+void nTreeNode::addChild(nTreeNode * pNode) 
+{
+	_childs->insertar(pNode);
 }
+
+nTreeNode nTreeNode::getChild(string pName) 
+{
+	_child->get(pName);
+}
+
+bool nTreeNode::searchChild(string pName)
+{
+	_child->search(pName);
+}	
 	
-bool numero::eql (numero pData)
-{ 
-	return _data == pData._data;
+void nTreeNode::eraseChild(string pName)
+{
+	_child->erase(pName);
 }
 
-void numero::print() 
-{ 
-	std::cout << _data << " - "; 
+
+void nTreeNode::print()
+{
+	
 }

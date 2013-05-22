@@ -17,7 +17,7 @@
  */
 
 #include <iostream>
-#include "simplelist.h"
+#include "simpleList.h"
 
 template <class T>
 simpleList<T>::simpleList() 
@@ -27,7 +27,7 @@ simpleList<T>::simpleList()
 }
 
 
-template <typename T>
+template <class T>
 void simpleList<T>::insertStart(T pData) 
 {
 	node<T> * newNode = new node<T> (pData);
@@ -35,7 +35,7 @@ void simpleList<T>::insertStart(T pData)
 	_head = newNode;
 	_size++;
 }
-
+/*
 template <class T>
 void simpleList<T>::insertEnd(T pData)
 {
@@ -75,7 +75,6 @@ bool simpleList<T>::search(T pData)
 }
 
 
-
 template <class T>
 void simpleList<T>::erase(T pData)
 {
@@ -101,7 +100,7 @@ void simpleList<T>::erase(T pData)
 		}
 	}
 }
-
+*/
 template <class T>
 void simpleList<T>::print()
 {

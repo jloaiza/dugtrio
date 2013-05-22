@@ -2,9 +2,13 @@
 #include <iostream>
 #include "numero.h"
 #include "node.h"
-#include "simplelist.h"
-#include "simplelist.cpp"
+#include "simpleList.h"
 #include "node.cpp"
+#include "simpleList.cpp"
+
+
+
+
 
 
 int main(int argc, char **argv)

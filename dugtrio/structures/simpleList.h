@@ -1,5 +1,5 @@
 /*
- * node.h
+ * simpleList.h
  * 
  * Copyright 2013 201230364 Maikol Barrantes Garcia <mibarrantes@TM-OP>
  * 
@@ -17,19 +17,27 @@
  */
 
 
-#ifndef NODE_H
-#define NODE_H
+#ifndef SIMPLELIST_H
+#define SIMPLELIST_H
 
-#include <iostream>
+#include "node.h"
 
-template <class T> class node
+template <class T> class simpleList
 {
+
 public:
-	T _data;
-	node<T> * _next;
+
+	int _size;
+	node<T> * _head;
+
+	simpleList();
 	
-	node(T pData);
+	void insertStart(T pData);
+	//void insertEnd(T pData);
+	//bool search(T pData);
+	//void erase(T pData);
 	void print();
+	
 };
 
-#endif // NODE_H
+#endif // SIMPLELIST_H

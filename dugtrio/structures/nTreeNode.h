@@ -1,5 +1,5 @@
 /*
- * node.h
+ * nTreeNode.h
  * 
  * Copyright 2013 201230364 Maikol Barrantes Garcia <mibarrantes@TM-OP>
  * 
@@ -17,19 +17,28 @@
  */
 
 
-#ifndef NODE_H
-#define NODE_H
+#ifndef NTREENODE
+#define NTREENODE
 
-#include <iostream>
-
-template <class T> class node
-{
-public:
-	T _data;
-	node<T> * _next;
+class nTreeNode {
 	
-	node(T pData);
-	void print();
-};
+private:
+	
+	iFile * _File;
+	listasimple<nTreeNode> * _childs;
+	string _name;
+	
+public:
 
-#endif // NODE_H
+	nTreeNode (iFile* pFile, string pName);
+	
+	void addChild(nTreeNode * pNode);
+	nTreeNode getChild();
+	bool searchChild(string pName);
+	void eraseChild(string pName);
+	void print();
+	
+};
+#endif //NTREENODE
+
+
