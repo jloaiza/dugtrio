@@ -1,5 +1,5 @@
 /*
- * nTreeNode.h
+ * simpleList.h
  * 
  * Copyright 2013 201230364 Maikol Barrantes Garcia <mibarrantes@TM-OP>
  * 
@@ -17,28 +17,27 @@
  */
 
 
-#ifndef NTREENODE
-#define NTREENODE
+#ifndef SIMPLELIST_H
+#define SIMPLELIST_H
 
-class nTreeNode {
-	
-private:
-	
-	iFile * _File;
-	listasimple<nTreeNode> * _childs;
-	string _name;
-	
+#include "node.h"
+
+template <class T> class simpleList
+{
+
 public:
 
-	nTreeNode (iFile* pFile, string pName);
+	int _size;
+	node<T> * _head;
+
+	simpleList();
 	
-	void addChild(nTreeNode * pNode);
-	nTreeNode getChild();
-	bool searchChild(string pName);
-	void eraseChild(string pName);
+	void insertStart(T pData);
+	void insertEnd(T pData);
+	bool search(T pData);
+	void erase(T pData);
 	void print();
 	
 };
-#endif //NTREENODE
 
-
+#endif // SIMPLELIST_H

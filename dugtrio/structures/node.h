@@ -22,11 +22,20 @@
 
 #include <iostream>
 
+<<<<<<< HEAD
 template <class T> class node
 {
 public:
 	T _data;
 	node<T> * _next;
+=======
+template <class T>
+class node
+{
+public:
+	T _data;
+	node<T> _next;
+>>>>>>> fd044aceca801fa546b3952cdcbf83d6919d799e
 	
 	node(T pData);
 	void print();

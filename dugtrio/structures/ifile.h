@@ -1,5 +1,5 @@
 /*
- * nTreeNode.h
+ * iFile.h
  * 
  * Copyright 2013 201230364 Maikol Barrantes Garcia <mibarrantes@TM-OP>
  * 
@@ -17,28 +17,25 @@
  */
 
 
-#ifndef NTREENODE
-#define NTREENODE
+//#include <iostream>
+//int main(int argc, char **argv) { return 0; }
 
-class nTreeNode {
+#ifndef IFILE
+#define IFILE
+
+class iFile 
+{
 	
 private:
-	
-	iFile * _File;
-	listasimple<nTreeNode> * _childs;
-	string _name;
-	
+
+		string _name;
+		int _pointer;		//recuerde que esto no es un entero, simplemente es un tipo de dato temporal para pruebas
+		
 public:
-
-	nTreeNode (iFile* pFile, string pName);
 	
-	void addChild(nTreeNode * pNode);
-	nTreeNode getChild();
-	bool searchChild(string pName);
-	void eraseChild(string pName);
-	void print();
-	
+	iFile(string pName, int pPointer);
+	int getPointer();
+	void setPointer(pPointer);
+		
 };
-#endif //NTREENODE
-
-
+#endif IFILE
