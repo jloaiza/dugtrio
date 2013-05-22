@@ -7,14 +7,18 @@ SOURCES         += \
     dugtrio.cpp \
     LSS/lss.cpp \
     LSS/lssmanager.cpp \
-    LSS/lssxml.cpp
+    LSS/lssxml.cpp \
+    LSS/regsisterspace.cpp \
+    LSS/registerbuffer.cpp
 
 HEADERS += \
     LSS/lss.h \
     LSS/lssmanager.h \
     LSS/lssxml.h \
     observer.h \
-    observable.h
+    observable.h \
+    LSS/regsisterspace.h \
+    LSS/registerbuffer.h
 
 OTHER_FILES += \
     LSS/lssconfig.xml

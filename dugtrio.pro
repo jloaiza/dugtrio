@@ -7,4 +7,5 @@ SUBDIRS += \
     dugtrio \
     ui \
     md5 \
-    networkhandler \
+    network/networkhandler \
+    network/clientcpp \
