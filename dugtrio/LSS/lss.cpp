@@ -1,21 +1,3 @@
-/*
- * lss.cpp
- * 
- * Copyright 2013 maikol <maikol@maikol-wander-15>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * 
- */
-
 #include "lss.h"
 
 /**
@@ -24,8 +6,7 @@
  * @param pID nombre unico del disco, en caso de existir mas de uno en el mismo servidor
  * @param pSize tamaño maximo del disco;
  */
-lss::lss(const char * pDisk, short pID, int pSize, int pBlockSize) 
-{
+Lss::Lss(const char * pDisk, short pID, int pSize, int pBlockSize){
 	_disk = pDisk;
 	_busy = false;
 	_id = pID;
@@ -38,7 +19,7 @@ lss::lss(const char * pDisk, short pID, int pSize, int pBlockSize)
  * @param pText informacion que escribiremos en el disco
  * @param pBlock bloque sobre el cual escribiremos
  */
-void lss::write(char* pText, int pBlock)
+void Lss::write(char* pText, int pBlock)
 {
 	/* abre el archivo */
 	std::fstream File;
@@ -64,7 +45,7 @@ void lss::write(char* pText, int pBlock)
  * @param pBlock bloque que se va a leer
  * @param pBlockSize tamaño del bloque que vamos a leer
  */
-char * lss::read(int pBlock)
+char * Lss::read(int pBlock)
 {
 	/* arreglo para contener los datos leídos */
 	char * buffer = new char [_blockSize];
