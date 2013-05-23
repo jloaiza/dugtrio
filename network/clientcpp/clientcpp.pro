@@ -7,5 +7,4 @@ HEADERS += \
     test.h
 
 SOURCES += \
-    main.cpp \
     client.cpp

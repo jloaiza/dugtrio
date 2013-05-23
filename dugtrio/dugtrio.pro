@@ -12,14 +12,12 @@ SOURCES         += \
     LSS/registerbuffer.cpp \
     structures/ntree.cpp \
     structures/ntreenode.cpp \
-    LSS/testerlss.cpp \
     LSS/lssoperations.cpp \
-    LSS/lssmain.cpp \
     LSS/lssdirection.cpp \
     structures/simplelist.cpp \
     structures/numero.cpp \
     structures/node.cpp \
-    structures/lstester.cpp
+    structures/ifile.cpp
 
 HEADERS += \
     LSS/lss.h \
@@ -36,7 +34,8 @@ HEADERS += \
     structures/simplelist.h \
     structures/numero.h \
     structures/node.h \
-    structures/ifile.h
+    structures/ifile.h \
+    comparable.h
 
 OTHER_FILES += \
     LSS/lssconfig.xml \

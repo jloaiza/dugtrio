@@ -5,7 +5,6 @@ CONFIG          -=      qt
 
 SOURCES         += \
     md5.cpp \
-    testmd5.cpp \
 
 HEADERS += \
     md5.h \
