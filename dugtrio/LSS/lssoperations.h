@@ -1,5 +1,5 @@
 /*
- * lss.h
+ * lssOperations.h
  * 
  * Copyright 2013 maikol <maikol@maikol-wander-15>
  * 
@@ -16,30 +16,21 @@
  * 
  */
 
+#ifndef LSSOPERATIONS
+#define LSSOPERATIONS
 
-#ifndef LSS
-#define LSS
+#include "lss.h"
 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-
-class lss {
+class lssOperations {
 	
 private:
-
-	const char * _disk;
-	bool _busy;
-	char _id;
-	int _size;
-	int _blockSize;
-			
+	lss * _lss;	
 public:
-	
-	lss(const char *  pDisk, short pID, int pSize, int pBlockSize);
-	void write(char* pText, int pBlock);
-	char * read(int pBlock);
-	
+	lssOperations();
+	void createDisk(char* pFileName, int pFileSize, int pBlockSize, short pID);
+	void eraseDisk(char* pFileName);
+	void saveDisks(char* pFileName);
+	void loadDisks(char* pFileName);
 };
 
-#endif //LSS
+#endif

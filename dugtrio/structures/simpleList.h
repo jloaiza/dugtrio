@@ -1,7 +1,7 @@
 /*
- * lss.h
+ * simpleList.h
  * 
- * Copyright 2013 maikol <maikol@maikol-wander-15>
+ * Copyright 2013 201230364 Maikol Barrantes Garcia <mibarrantes@TM-OP>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,29 +17,27 @@
  */
 
 
-#ifndef LSS
-#define LSS
+#ifndef SIMPLELIST_H
+#define SIMPLELIST_H
 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
+#include "node.h"
 
-class lss {
-	
-private:
+template <class T> class simpleList
+{
 
-	const char * _disk;
-	bool _busy;
-	char _id;
-	int _size;
-	int _blockSize;
-			
 public:
+
+	int _size;
+	node<T> * _head;
+
+	simpleList();
 	
-	lss(const char *  pDisk, short pID, int pSize, int pBlockSize);
-	void write(char* pText, int pBlock);
-	char * read(int pBlock);
+	void insertStart(T pData);
+	//void insertEnd(T pData);
+	//bool search(T pData);
+	//void erase(T pData);
+	void print();
 	
 };
 
-#endif //LSS
+#endif // SIMPLELIST_H

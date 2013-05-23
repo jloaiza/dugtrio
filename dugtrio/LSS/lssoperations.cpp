@@ -1,5 +1,5 @@
 /*
- * lssManager.cpp
+ * lssOperations.cpp
  * 
  * Copyright 2013 maikol <maikol@maikol-wander-15>
  * 
@@ -15,27 +15,27 @@
  * 
  * 
  */
- 
- #include "lssManager.h"
 
-/**
- * crea un disco para almacenamiento
- * @param pFileName nombre del archivo(lss) en la computadora
- * @param pFileSize tamaño del lss
- * @param pBlockSize tamaño del bloque en el lss
- * @param pID id que diferencia al lss de ótros con la misma ip
- */
-void lssManager::createDisk(char* pFileName, int pFileSize, int pBlockSize, short pID)
+
+#include "lssOperations.h"
+
+
+void lssOperations::createDisk(char* pFileName, int pFileSize, int pBlockSize, short pID)
 {
 	// verificar si el archivo existe
 	lss * temporalDisk = new lss(pFileName, pID, pFileSize, pBlockSize);
 }
 
-/**
- * borrar un disco
- * @param pFileName nombre del archivo(lss) en la computadora
- */
-void lssManager::eraseDisk(char* pFileName)
+void lssOperations::eraseDisk(char* pFileName)
 {
-	_lss = NULL;
+	_lss 
+}
+
+void lssOperations::saveDisks(char* pXML){
+	
+}
+
+
+void lssOperations::loadDisks(char* pXML){
+	
 }

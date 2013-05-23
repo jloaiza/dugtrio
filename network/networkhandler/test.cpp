@@ -1,5 +1,5 @@
 
-#include "Test.h"
+#include "test.h"
 
 void Test::inMessage(std::string pMessage, int pSocket)
 {

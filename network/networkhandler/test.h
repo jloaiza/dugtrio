@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "NetworkHandler.h"
+#include "networkhandler.h"
 
 class Test : public NetworkHandler
 {

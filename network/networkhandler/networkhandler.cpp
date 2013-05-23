@@ -1,5 +1,5 @@
 
-#include "NetworkHandler.h"
+#include "networkhandler.h"
 
 NetworkHandler::NetworkHandler()
 {

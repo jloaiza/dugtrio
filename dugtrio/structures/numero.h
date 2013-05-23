@@ -1,7 +1,7 @@
 /*
- * lss.h
+ * numero.h
  * 
- * Copyright 2013 maikol <maikol@maikol-wander-15>
+ * Copyright 2013 maikol barrantes <maikol@maikol-wander-15>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,33 +13,29 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ * 
  * 
  */
 
+#ifndef NUMERO
+#define NUMERO
 
-#ifndef LSS
-#define LSS
+class numero 
+{
 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-
-class lss {
-	
-private:
-
-	const char * _disk;
-	bool _busy;
-	char _id;
-	int _size;
-	int _blockSize;
-			
 public:
+
+	numero(int pData);
+	numero();
 	
-	lss(const char *  pDisk, short pID, int pSize, int pBlockSize);
-	void write(char* pText, int pBlock);
-	char * read(int pBlock);
-	
+	int _data;
+	bool mayor(numero pData);
+	bool eql (numero pData);
+	void print ();
 };
 
-#endif //LSS
+#endif

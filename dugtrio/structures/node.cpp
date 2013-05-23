@@ -1,7 +1,7 @@
 /*
- * lss.h
+ * node.cpp
  * 
- * Copyright 2013 maikol <maikol@maikol-wander-15>
+ * Copyright 2013 201230364 Maikol Barrantes Garcia <mibarrantes@TM-OP>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,29 +17,16 @@
  */
 
 
-#ifndef LSS
-#define LSS
+#include "node.h"
 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
 
-class lss {
-	
-private:
+template <class T>
+node<T>::node(T pData) {
+	_data = pData;
+	_next = NULL;
+}
 
-	const char * _disk;
-	bool _busy;
-	char _id;
-	int _size;
-	int _blockSize;
-			
-public:
-	
-	lss(const char *  pDisk, short pID, int pSize, int pBlockSize);
-	void write(char* pText, int pBlock);
-	char * read(int pBlock);
-	
-};
-
-#endif //LSS
+template <class T>
+void node<T>::print() {
+	_data.print();
+}

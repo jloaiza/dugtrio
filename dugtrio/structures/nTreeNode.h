@@ -1,7 +1,7 @@
 /*
- * lss.h
+ * nTreeNode.h
  * 
- * Copyright 2013 maikol <maikol@maikol-wander-15>
+ * Copyright 2013 201230364 Maikol Barrantes Garcia <mibarrantes@TM-OP>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,29 +17,28 @@
  */
 
 
-#ifndef LSS
-#define LSS
+#ifndef NTREENODE
+#define NTREENODE
 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-
-class lss {
+class nTreeNode {
 	
 private:
-
-	const char * _disk;
-	bool _busy;
-	char _id;
-	int _size;
-	int _blockSize;
-			
-public:
 	
-	lss(const char *  pDisk, short pID, int pSize, int pBlockSize);
-	void write(char* pText, int pBlock);
-	char * read(int pBlock);
+	iFile * _File;
+	listasimple<nTreeNode> * _childs;
+	string _name;
+	
+public:
+
+	nTreeNode (iFile* pFile, string pName);
+	
+	void addChild(nTreeNode * pNode);
+	nTreeNode getChild();
+	bool searchChild(string pName);
+	void eraseChild(string pName);
+	void print();
 	
 };
+#endif //NTREENODE
 
-#endif //LSS
+

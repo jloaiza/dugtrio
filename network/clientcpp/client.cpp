@@ -1,5 +1,5 @@
 
-#include "Client.h"
+#include "client.h"
 
 Client::Client(std::string pIp, int pPort) 
 {

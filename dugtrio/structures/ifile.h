@@ -1,7 +1,7 @@
 /*
- * lss.h
+ * iFile.h
  * 
- * Copyright 2013 maikol <maikol@maikol-wander-15>
+ * Copyright 2013 201230364 Maikol Barrantes Garcia <mibarrantes@TM-OP>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,29 +17,25 @@
  */
 
 
-#ifndef LSS
-#define LSS
+//#include <iostream>
+//int main(int argc, char **argv) { return 0; }
 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
+#ifndef IFILE
+#define IFILE
 
-class lss {
+class iFile 
+{
 	
 private:
 
-	const char * _disk;
-	bool _busy;
-	char _id;
-	int _size;
-	int _blockSize;
-			
+		string _name;
+		int _pointer;		//recuerde que esto no es un entero, simplemente es un tipo de dato temporal para pruebas
+		
 public:
 	
-	lss(const char *  pDisk, short pID, int pSize, int pBlockSize);
-	void write(char* pText, int pBlock);
-	char * read(int pBlock);
-	
+	iFile(string pName, int pPointer);
+	int getPointer();
+	void setPointer(pPointer);
+		
 };
-
-#endif //LSS
+#endif IFILE
