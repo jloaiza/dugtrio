@@ -1,122 +1,88 @@
-/*
- * simpleList.cpp
- * 
- * Copyright 2013 201230364 Maikol Barrantes Garcia <mibarrantes@TM-OP>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * 
- */
 
-#include <iostream>
 #include "simplelist.h"
 
-template <class T>
-simpleList<T>::simpleList() 
+#include <iostream>
+#include "node.h"
+#include "comparable.h"
+
+SimpleList::SimpleList()
 {
 	_size = 0;
-	_head = NULL;
+    _head = 0;
 }
 
-
-template <typename T>
-void simpleList<T>::insertStart(T pData) 
+void SimpleList::insert(Comparable *pData)
 {
-	node<T> * newNode = new node<T> (pData);
-	newNode->_next = _head;
+    Node* newNode = new Node(pData);
+    newNode->next = _head;
 	_head = newNode;
 	_size++;
 }
 
-template <class T>
-void simpleList<T>::insertEnd(T pData)
+bool SimpleList::search(std::string pName)
 {
-	_size++;
-	node<T> * newNode = new node<T> (pData);
-	if (!_head) 
-	{
-		_head = newNode;
-	}
-	else 
-	{
-		node<T> * temp = _head;
-		while (temp->_next != NULL)
-		{
-			temp = temp->_next;
-		}
-		temp->_next = newNode;
-	}
-}
+    Node* iterNode = _head;
 
-template <class T>
-bool simpleList<T>::search(T pData)
-{
-	if (!_head){
-		return false;
-	}
-	else{
-		node<T> *tmp = _head;
-		while (tmp){
-			if (tmp->getdato().igual(pData)) {
-				return true;
-			}
-			tmp = tmp->siguiente;
-		}
-		return false;
-	}
+    while (iterNode != 0){
+        if (iterNode->data->name.compare(pName) == 0){
+            return true;
+        }
+    }
+
+    return false;
 }
 
 
-
-template <class T>
-void simpleList<T>::erase(T pData)
+void SimpleList::erase(Comparable *pData)
 {
-	if (!_head) { }
-	else 
-	{
-		if ( (_head->_data()).eql(pData))
-		{
-			node<T> *tmp = _head;
-			_head = _head->_next;
-			tmp->_next = NULL;
-		}
-		else{
-			node<T> *tmp = _head;
-			while(! ((tmp->_next)->_data).eql(pData))
-			{
-				tmp = tmp->_next;
-			}
-			node<T> *tmp2 = tmp->_next;
-			tmp->_next = tmp2->_next;
-			tmp2->_next = NULL;
-			return true;
-		}
+    if (_head == 0) { /* Nothing to erase */ }
+    else {
+
+        if (_size == 1 && pData->eql(_head->data)){
+            _head = NULL;
+            return;
+        }
+
+        else {
+
+            Node* iterNode = _head;
+
+            while(iterNode->next != NULL && !(iterNode->next->data->eql(pData))){
+                iterNode = iterNode->next;
+            }
+
+            iterNode->next = iterNode->next->next;
+        }
 	}
 }
 
-template <class T>
-void simpleList<T>::print()
+Comparable* SimpleList::get(std::string pName)
 {
-	node<T> * tmp = _head;
-	if (!_head) 
-	{
-		std::cout << "la lista esta vacia";
+
+    Node* iterNode = _head;
+
+    while (iterNode != NULL){
+
+        if (iterNode->data->name.compare(pName) == 0){
+
+            return iterNode->data;
+        }
+    }
+
+    return 0;
+}
+
+void SimpleList::print()
+{
+    Node* iterNode= _head;
+    if (_head == NULL){
+        std::cout << "Empty List";
 	}
-	else 
+    else
 	{
-		while(tmp)
+        while(iterNode != NULL)
 		{
-			tmp->print();
-			if (!tmp->_next) std::cout << "NULL";
-			tmp = tmp->_next;
+            iterNode->data->print();
 		}
 	}
 	std::cout << std::endl;

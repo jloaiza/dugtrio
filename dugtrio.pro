@@ -9,3 +9,4 @@ SUBDIRS += \
     md5 \
     network/networkhandler \
     network/clientcpp \
+    varioustesters/testers

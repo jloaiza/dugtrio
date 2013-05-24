@@ -1,41 +1,50 @@
-/*
- * lssManager.cpp
- * 
- * Copyright 2013 maikol <maikol@maikol-wander-15>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * 
- */
- 
- #include "lssManager.h"
+
+#include "lssmanager.h"
+#include "lss.h"
+
+lssManager::lssManager() { }
 
 /**
- * crea un disco para almacenamiento
- * @param pFileName nombre del archivo(lss) en la computadora
- * @param pFileSize tamaño del lss
- * @param pBlockSize tamaño del bloque en el lss
- * @param pID id que diferencia al lss de ótros con la misma ip
+ * retorna el tamaño de un disco
+ * @param pDiskID id del disco del cual queremos el tamaño
+ * @return el tamaño del disco en bytes 
  */
-void lssManager::createDisk(char* pFileName, int pFileSize, int pBlockSize, short pID)
+int LssManager::getDiskSize(short pDiskID)
 {
-	// verificar si el archivo existe
-	lss * temporalDisk = new lss(pFileName, pID, pFileSize, pBlockSize);
+	
+	Lss temporal(std::to_string(pDiskID).data(), pDiskID, 0);
+	
+	if ( _lss->search(temporal) )
+	{
+		temporal = _lss->get(temporal);
+		char * buffer = temporal.read(0);
+		std::string temp;
+		for(int x=0; x<4; x++)
+		{
+			temp+=buffer[12+x];
+		}
+		int z = BytesHandler::to_ulong(temp);
+	}
 }
 
 /**
- * borrar un disco
- * @param pFileName nombre del archivo(lss) en la computadora
+ * retorna un espacio libre en el disco (en caso de haber)
+ * @param pDiskID id del disco del cual queremos un bloque
+ * @return numero del bloque libre
  */
-void lssManager::eraseDisk(char* pFileName)
+short LssManager::getFreeBlock(short pDiskID)
 {
-	_lss = NULL;
+	lss temporal(std::to_string(pDiskID).data(), pDiskID, 0);
+	if ( _lss->search(temporal) )
+	{
+		temporal = _lss->get(temporal);
+		char * buffer = temporal.read(0);
+		std::string temp;
+		for(int x=0; x<2; x++)
+		{
+			temp+=buffer[2+x];
+		}
+		int z = BytesHandler::to_ulong(temp);
+	}
+	
 }

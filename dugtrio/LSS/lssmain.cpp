@@ -15,11 +15,9 @@
  * 
  * 
  */
-
-
 #include <iostream>
 #include "info.h"
-#include "lssManager.h"
+#include "lssmanager.h"
 
 void title()
 {
@@ -31,7 +29,7 @@ void title()
 
 int main(int argc, char **argv)
 {
-	lssManager* diskManager = new lssManager();
+	LssManager* diskManager = new lssManager();
 	
 	title();	
 	
@@ -42,21 +40,15 @@ int main(int argc, char **argv)
 		
 		if (clave == 1)
 		{
-			char * fileName;
-			std::cout << NAME;
-			std::cin >> fileName;
 			int fileSize;
 			std::cout << SIZE1;
-			std::cin >> fileSize;
-			int blockSize;
-			std::cout << SIZE2;
-			std::cin >> blockSize;
-			diskManager->createDisk(fileName, fileSize, blockSize);
+			std::cin >> fileSize;		
+			diskManager->createDisk(fileSize);		
 		}
 		 
 		else if (clave == 2)
 		{
-			char * fileName;
+			short fileName;
 			std::cout << NAME;
 			std::cin >> fileName;
 			diskManager->eraseDisk(fileName);
@@ -64,18 +56,23 @@ int main(int argc, char **argv)
 		
 		else if (clave == 3)
 		{
-			diskManager->saveDisks();
+			diskManager->showDisks();
 		}
-		
+				
 		else if (clave == 4)
 		{
-			char * filename;
-			std::cout << NAME2;
-			std::cin >> fileName;
-			diskManager->loadDisks();
+			//diskManager->saveDisks();
 		}
 		
 		else if (clave == 5)
+		{
+			char * fileName;
+			std::cout << NAME2;
+			std::cin >> fileName;
+			//diskManager->loadDisks();
+		}
+		
+		else if (clave == 6)
 		{
 			break;
 		}
@@ -86,4 +83,3 @@ int main(int argc, char **argv)
 	
 	
 }
-

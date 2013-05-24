@@ -1,36 +1,20 @@
-/*
- * lssOperations.h
- * 
- * Copyright 2013 maikol <maikol@maikol-wander-15>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * 
- */
 
 #ifndef LSSOPERATIONS
 #define LSSOPERATIONS
 
-#include "lss.h"
+class Lss;
+class SimpleList;
 
-class lssOperations {
+class LssOperations {
 	
-private:
-	lss * _lss;	
+protected:
+	SimpleList* _lss;
+	short _disponibleID;
 public:
 	lssOperations();
-	void createDisk(char* pFileName, int pFileSize, int pBlockSize, short pID);
-	void eraseDisk(char* pFileName);
-	void saveDisks(char* pFileName);
-	void loadDisks(char* pFileName);
+	void createDisk(int pFileSize);
+	void showDisks();
+	void eraseDisk(short pFileName);
 };
 
 #endif

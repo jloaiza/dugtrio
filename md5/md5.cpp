@@ -32,6 +32,7 @@ documentation and/or software.
 
 /* interface header */
 #include "md5.h"
+#include "constants.h"
 
 #include <stdio.h>
 #include <memory.h>
@@ -132,8 +133,6 @@ void MD5::encode(uint1 output[], const uint4 input[], size_type len)
     output[j+3] = (input[i] >> 24) & 0xff;
   }
 }
-
-//////////////////////////////
 
 // apply MD5 algo on a block
 void MD5::transform(const uint1 block[blocksize])

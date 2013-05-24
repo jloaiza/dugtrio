@@ -12,12 +12,14 @@ class nTree {
 
 private:
 
-    /**
-     * @brief _head
-     */
-    nTreeNode   _head;
+    nTreeNode* _head;
 
 public:
+
+    /**
+     * @brief nTree
+     */
+    nTree();
 
     /**
      * @brief create
@@ -25,7 +27,7 @@ public:
      * @param pFile
      * @param pPath
      */
-    void create(std::string pName, iFile* pFile, std::string pPath);
+    void insert(std::string pName, iFile* pFile, std::string pPath);
 
     /**
      * @brief erase
@@ -47,4 +49,4 @@ public:
     nTreeNode* getHead();
 };
 
-#endif // NTREE_H
+#endif

@@ -1,43 +1,55 @@
-/*
- * simpleList.h
- * 
- * Copyright 2013 201230364 Maikol Barrantes Garcia <mibarrantes@TM-OP>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * 
- */
-
 
 #ifndef SIMPLELIST_H
 #define SIMPLELIST_H
 
-#include "node.h"
+#include <string>
 
-template <class T> class simpleList
-{
+class Node;
+class Comparable;
+
+class SimpleList{
 
 public:
 
 	int _size;
-	node<T> * _head;
+    Node* _head;
 
-	simpleList();
+    /**
+     * @brief SimpleList
+     */
+    SimpleList();
 	
-	void insertStart(T pData);
-	void insertEnd(T pData);
-	bool search(T pData);
-	void erase(T pData);
+    /**
+     * @brief insert
+     * @param pData
+     */
+    void insert(Comparable* pData);
+
+    /**
+     * @brief search
+     * @param pData
+     * @return
+     */
+    bool search(std::string pName);
+
+    /**
+     * @brief erase
+     * @param pData
+     */
+    void erase(Comparable* pData);
+
+    /**
+     * @brief get
+     * @param pName
+     * @return
+     */
+    Comparable* get(std::string pName);
+
+    /**
+     * @brief print
+     */
 	void print();
 	
 };
 
-#endif // SIMPLELIST_H
+#endif
