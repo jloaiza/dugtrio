@@ -1,5 +1,3 @@
-
-
 #ifndef LSS
 #define LSS
 
@@ -7,22 +5,23 @@
 #include <fstream>
 #include <iomanip>
 
-class Lss {
+class Lss:  {
 	
 private:
-
     const char* _disk;
 	bool _busy;
-	char _id;
 	int _size;
-	int _blockSize;
-			
+	int _blockSize;	
 public:
-
-    Lss(const char*  pDisk, short pID, int pSize, int pBlockSize);
+	short _id;
+    Lss(const char*  pDisk, short pID, int pSize);
+    void header();
 	void write(char* pText, int pBlock);
 	char * read(int pBlock);
-	
+	bool eql(Comparable* arg);
+	bool gtr(Comparable* arg);
+	bool lss(Comparable* arg);
+	void print();
 };
 
 #endif

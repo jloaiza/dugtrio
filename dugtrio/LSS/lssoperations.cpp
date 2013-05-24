@@ -1,24 +1,53 @@
-
 #include "lssoperations.h"
 #include "lss.h"
 
-
-void LssOperations::createDisk(char* pFileName, int pFileSize, int pBlockSize, short pID)
+lssOperations::lssOperations()
 {
-	// verificar si el archivo existe
-    Lss * temporalDisk = new Lss(pFileName, pID, pFileSize, pBlockSize);
+	_disponibleID = 0;
+	_lss = new simpleList<lss>();
 }
 
-void LssOperations::eraseDisk(char* pFileName)
+/**
+ * crea un disco para almacenamiento
+ * @param pFileSize tamaño del lss
+ */
+void lssOperations::createDisk(int pFileSize)
 {
-    /** TODO **/
+	short * temp = new short();
+	*temp = _disponibleID;
+	_disponibleID++;
+	
+	lss temporalDisk( std::to_string(*temp).data(), *temp, pFileSize);
+	_lss->insertStart(temporalDisk);
+	
 }
 
-void LssOperations::saveDisks(char* pXML){
+/**
+ * muestra los discos disponibles para almacenamiento
+ */
+void lssOperations::showDisks()
+{
+	_lss->print();
+}
+
+
+/**
+ * borrar un disco
+ * @param pID nombre del archivo(lss) en la computadora
+ */
+void lssOperations::eraseDisk(short pID)
+{	
+	lss temporalDisk( std::to_string(pID).data(), pID, 0);
+	_lss->erase(temporalDisk);
+}
+
+/*
+void lssOperations::saveDisks(char* pXML){
 	
 }
 
 
-void LssOperations::loadDisks(char* pXML){
+void lssOperations::loadDisks(char* pXML){
 	
 }
+*/
