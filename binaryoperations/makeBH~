@@ -1,2 +1,0 @@
-all:
-	g++ -std=c++0x baseconverter.cpp bytesconverter.cpp -o bytesTester
