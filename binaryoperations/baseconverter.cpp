@@ -118,7 +118,7 @@ std::string BaseConverter::complement(std::string pBits){
 }
 
 std::string BaseConverter::multChar(char pChar, int pCount){
-	std::string buffer;
+	std::string buffer = "";
 	for (int i = 0; i < pCount; i++){
 		buffer += pChar;
 	}
