@@ -3,17 +3,18 @@
 #define LSSOPERATIONS
 
 class Lss;
+class SimpleList;
 
 class LssOperations {
 	
-private:
-    Lss * _lss;
+protected:
+	SimpleList* _lss;
+	short _disponibleID;
 public:
-	LssOperations();
-	void createDisk(char* pFileName, int pFileSize, int pBlockSize, short pID);
-	void eraseDisk(char* pFileName);
-	void saveDisks(char* pFileName);
-	void loadDisks(char* pFileName);
+	lssOperations();
+	void createDisk(int pFileSize);
+	void showDisks();
+	void eraseDisk(short pFileName);
 };
 
 #endif
