@@ -1,2 +1,0 @@
-all:
-	g++ -std=c++0x ../exceptions.cpp byteshandler.cpp -o bytesHandlerTester
