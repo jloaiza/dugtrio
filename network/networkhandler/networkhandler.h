@@ -16,7 +16,7 @@
 #include <iostream>
 
 /* Puerto  de la conexión. */
-#define PORT 9999
+#define PORT 8880
 
 /* Tamaño del buffer. */
 #define BUFFERSIZE 512

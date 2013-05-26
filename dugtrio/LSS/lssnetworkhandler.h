@@ -11,6 +11,8 @@ public:
 
 private:
 	LSSManager* _manager;
+
+	long getFreeBlock(int pSocket);
 	
 };
 
