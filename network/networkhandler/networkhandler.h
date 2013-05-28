@@ -30,6 +30,11 @@ class NetworkHandler
         */
         NetworkHandler(); 
         /**
+        * Ciclo que mantiene el servidor corriendo a la espera de conexiones.
+        */
+        void Run(); 
+    protected:
+        /**
          * Método que se implementará dentro de cualquier clase que herede.
          * @param pMessage: Mensaje entrante desde el socket.
          * @param pSocket: Desde donde llega el mensaje.
@@ -42,9 +47,13 @@ class NetworkHandler
          */
         void outMessage(std::string pMessage, int pSocket);
         /**
-        * Ciclo que mantiene el servidor corriendo a la espera de conexiones.
-        */
-        void Run(); 
+         * Método para desconectar un cliente del server.
+         */     
+        void disconnectClient();
+        /**
+         * Método para cerrar el server por completo.
+         */
+        void closeServer();
     private:
         /**
         * @param pLoop: Mensaje de esperando conexión.
@@ -75,6 +84,13 @@ class NetworkHandler
         * Verificar si algun cliente ha pedido la desconección.
         */
         void verifyDeadClient(); 
+        
+        /**
+         * Método que devuelve la ip real del cliente actual.
+         * @return: IP del cliente.
+         */
+        
+        std::string getClientIP();
 
         /* Conjunto de parametros de red a vigilar */
 
@@ -101,5 +117,7 @@ class NetworkHandler
         int _run;
         int _indicatorMessage;
         int _byteCount;
+        int _runClient;
+        int _exitCode;
 };
 
