@@ -1,31 +1,34 @@
-#include "lssoperations.h"
 #include "lss.h"
+#include "../structures/simplelist.h"
+#include "../structures/node.h"
 
-lssOperations::lssOperations()
+#include "lssoperations.h"
+
+LssOperations::LssOperations()
 {
 	_disponibleID = 0;
-	_lss = new simpleList<lss>();
+	_lss = new SimpleList();
 }
 
 /**
  * crea un disco para almacenamiento
  * @param pFileSize tamaño del lss
  */
-void lssOperations::createDisk(int pFileSize)
+void LssOperations::createDisk(int pFileSize)
 {
 	short * temp = new short();
 	*temp = _disponibleID;
 	_disponibleID++;
 	
-	lss temporalDisk( std::to_string(*temp).data(), *temp, pFileSize);
-	_lss->insertStart(temporalDisk);
+	Lss temporalDisk( std::to_string(*temp).data(), *temp, pFileSize);
+	_lss->insert(&temporalDisk);
 	
 }
 
 /**
  * muestra los discos disponibles para almacenamiento
  */
-void lssOperations::showDisks()
+void LssOperations::showDisks()
 {
 	_lss->print();
 }
@@ -35,10 +38,10 @@ void lssOperations::showDisks()
  * borrar un disco
  * @param pID nombre del archivo(lss) en la computadora
  */
-void lssOperations::eraseDisk(short pID)
+void LssOperations::eraseDisk(short pID)
 {	
-	lss temporalDisk( std::to_string(pID).data(), pID, 0);
-	_lss->erase(temporalDisk);
+	Lss temporalDisk( std::to_string(pID).data(), pID, 0);
+	_lss->erase(&temporalDisk);
 }
 
 /*

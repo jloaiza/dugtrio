@@ -3,7 +3,9 @@
 
 #include "lssoperations.h"
 
+
 class Lss;
+class BytesHandler;
 
 class LssManager : public LssOperations {
 	

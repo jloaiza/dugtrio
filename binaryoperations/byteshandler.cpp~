@@ -40,7 +40,6 @@ std::string BytesHandler::bin2str(std::string pBinary){
 	return buffer;
 }
 
-/*
 int main(){
 	std::string d = "123456789";
 	std::cout<<d.find('9')<<std::endl;
@@ -51,4 +50,3 @@ int main(){
 	std::cout<<BytesHandler::string2bin(BytesHandler::bin2str("0000000000000001"), 2)<<std::endl;
 	return 0;
 }
-*/

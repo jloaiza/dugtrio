@@ -1,19 +1,17 @@
 #ifndef LSS
 #define LSS
 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
+#include "../comparable.h"
 
-class Lss:  {
+class Lss : public Comparable {
 	
 private:
     const char* _disk;
 	bool _busy;
 	int _size;
-	int _blockSize;	
+	int _blockSize;
+	short _id;	
 public:
-	short _id;
     Lss(const char*  pDisk, short pID, int pSize);
     void header();
 	void write(char* pText, int pBlock);

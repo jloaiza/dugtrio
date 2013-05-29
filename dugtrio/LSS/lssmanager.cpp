@@ -1,8 +1,9 @@
+#include "lss.h"
+#include "../../binaryoperations/byteshandler.h"
 
 #include "lssmanager.h"
-#include "lss.h"
 
-lssManager::lssManager() { }
+LssManager::LssManager() { }
 
 /**
  * retorna el tamaño de un disco
@@ -11,7 +12,8 @@ lssManager::lssManager() { }
  */
 int LssManager::getDiskSize(short pDiskID)
 {
-	
+	return 1;
+	/*
 	Lss temporal(std::to_string(pDiskID).data(), pDiskID, 0);
 	
 	if ( _lss->search(temporal) )
@@ -25,6 +27,7 @@ int LssManager::getDiskSize(short pDiskID)
 		}
 		int z = BytesHandler::to_ulong(temp);
 	}
+	*/
 }
 
 /**
@@ -34,7 +37,9 @@ int LssManager::getDiskSize(short pDiskID)
  */
 short LssManager::getFreeBlock(short pDiskID)
 {
-	lss temporal(std::to_string(pDiskID).data(), pDiskID, 0);
+	return 1;
+	/*
+	Lss temporal(std::to_string(pDiskID).data(), pDiskID, 0);
 	if ( _lss->search(temporal) )
 	{
 		temporal = _lss->get(temporal);
@@ -42,9 +47,9 @@ short LssManager::getFreeBlock(short pDiskID)
 		std::string temp;
 		for(int x=0; x<2; x++)
 		{
-			temp+=buffer[2+x];
+			temporal+=buffer[2+x];
 		}
-		int z = BytesHandler::to_ulong(temp);
+		int z = BytesHandler::to_ulong(temporal);
 	}
-	
+	*/
 }

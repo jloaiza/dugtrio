@@ -1,5 +1,11 @@
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <cstring>
+
+#include "../../binaryoperations/byteshandler.h"
+
 #include "lss.h"
-#include "../comparable.h"
 
 /**
  * constructor de la clase LSS
@@ -94,23 +100,23 @@ char * Lss::read(int pBlock)
 	return buffer;
 }
 
-bool eql(Comparable* arg)
+bool Lss::eql(Comparable* arg)
 {
-	return _id == ((Lss)arg)->_id;
+	return _id == ( (Lss*)&arg )->_id;
 }
 
-bool gtr(Comparable* arg)
+bool Lss::gtr(Comparable* arg)
 {
-	
+	return true;
 }
 
-bool lss(Comparable* arg)
+bool Lss::lss(Comparable* arg)
 {
-	
+	return true;
 }
 
-void print()
+void Lss::print()
 {
-	
+	std::cout << _id << "(" << _size << ")" << " - ";
 }
 

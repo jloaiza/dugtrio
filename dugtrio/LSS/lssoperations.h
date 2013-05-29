@@ -1,4 +1,3 @@
-
 #ifndef LSSOPERATIONS
 #define LSSOPERATIONS
 
@@ -11,7 +10,7 @@ protected:
 	SimpleList* _lss;
 	short _disponibleID;
 public:
-	lssOperations();
+	LssOperations();
 	void createDisk(int pFileSize);
 	void showDisks();
 	void eraseDisk(short pFileName);
