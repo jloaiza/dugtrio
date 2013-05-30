@@ -9,10 +9,9 @@ void title()
 	std::cout << lssmenu9 << "\n" << lssmenuS << "\n" << lssmenuL << "\n";
 }
 
-
 int main(int argc, char **argv)
 {
-	LssManager* diskManager = new LssManager();
+	LssManager* diskManager = new LssManager(4);
 	
 	title();	
 	

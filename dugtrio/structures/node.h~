@@ -7,7 +7,7 @@
 class Node {
 
 public:
-    Comparable* data;
+    Comparable data;
     Node* next;
 	
     Node(Comparable* pData);

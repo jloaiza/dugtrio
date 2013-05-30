@@ -1,12 +1,11 @@
 
 #include "node.h"
-#include "comparable.h"
 
 Node::Node(Comparable *pData) {
-    data = pData;
-    next = 0;
+    data = *pData;
+    next = NULL;
 }
 
 void Node::print() {
-    data->print();
+    data.print();
 }

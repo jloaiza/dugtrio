@@ -1,6 +1,4 @@
-
 #include "simplelist.h"
-
 #include <iostream>
 #include "node.h"
 #include "../comparable.h"
@@ -8,7 +6,7 @@
 SimpleList::SimpleList()
 {
 	_size = 0;
-    _head = 0;
+    _head = NULL;
 }
 
 void SimpleList::insert(Comparable *pData)
@@ -22,13 +20,13 @@ void SimpleList::insert(Comparable *pData)
 bool SimpleList::search(std::string pName)
 {
     Node* iterNode = _head;
-
-    while (iterNode != 0){
-        if (iterNode->data->name.compare(pName) == 0){
+    while (iterNode != 0)
+    {
+        if ((iterNode->data)->name.compare(pName) == 0)
+        {
             return true;
         }
     }
-
     return false;
 }
 
@@ -36,46 +34,46 @@ bool SimpleList::search(std::string pName)
 void SimpleList::erase(Comparable *pData)
 {
     if (_head == 0) { /* Nothing to erase */ }
-    else {
-
-        if (_size == 1 && pData->eql(_head->data)){
-            _head = NULL;
-            return;
+    else 
+    {
+        if (_size == 1 && pData->eql(_head->data))
+        {
+            Node* tmp = _head->next;
+            _head->next = NULL; 
+            _head = tmp;
         }
-
-        else {
-
+        else 
+        {
             Node* iterNode = _head;
-
-            while(iterNode->next != NULL && !(iterNode->next->data->eql(pData))){
+            while( iterNode->next != NULL && !((iterNode->next)->data)->eql(pData) )
+            {
                 iterNode = iterNode->next;
             }
-
-            iterNode->next = iterNode->next->next;
+            Node* tmp = iterNode->next;
+            iterNode->next = tmp->next;
+            tmp->next = NULL;
         }
 	}
 }
 
 Comparable* SimpleList::get(std::string pName)
 {
-
     Node* iterNode = _head;
-
-    while (iterNode != NULL){
-
-        if (iterNode->data->name.compare(pName) == 0){
-
+    while (iterNode != NULL)
+    {
+        if ((iterNode->data)->name.compare(pName) == 0)
+        {
             return iterNode->data;
         }
     }
-
     return 0;
 }
 
 void SimpleList::print()
 {
     Node* iterNode = _head;
-    if (_head == NULL){
+    if (_head == NULL)
+    {
         std::cout << "Empty List";
 	}
     else
@@ -84,7 +82,7 @@ void SimpleList::print()
 		{
             (iterNode->data)->print();
             iterNode = iterNode->next;
-		}
+		}	
 	}
 	std::cout << std::endl;
 }

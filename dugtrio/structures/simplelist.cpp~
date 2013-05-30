@@ -3,12 +3,12 @@
 
 #include <iostream>
 #include "node.h"
-#include "comparable.h"
+#include "../comparable.h"
 
 SimpleList::SimpleList()
 {
 	_size = 0;
-    _head = 0;
+    _head = NULL;
 }
 
 void SimpleList::insert(Comparable *pData)
@@ -74,7 +74,7 @@ Comparable* SimpleList::get(std::string pName)
 
 void SimpleList::print()
 {
-    Node* iterNode= _head;
+    Node* iterNode = _head;
     if (_head == NULL){
         std::cout << "Empty List";
 	}
@@ -82,8 +82,9 @@ void SimpleList::print()
 	{
         while(iterNode != NULL)
 		{
-            iterNode->data->print();
-		}
+            (iterNode->data).print();
+            iterNode = iterNode->next;
+		}	
 	}
 	std::cout << std::endl;
 }

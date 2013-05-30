@@ -1,21 +1,27 @@
 #ifndef LSSMANAGER
 #define LSSMANAGER
 
-#include "lssoperations.h"
-
-
 class Lss;
-class BytesHandler;
-
-class LssManager : public LssOperations {
+class SimpleList;
+class LssManager{
 	
 private:
+	SimpleList* _lss;
+	short _disponibleID;
 	short _ID;
-    Lss * _lss;
 public:
-	LssManager();
-	int getDiskSize(short pDiskID);
-	short getFreeBlock(short pDiskID);
+	LssManager(short pID);
+	void write(char* pData, short pID, int pBlock);
+	char* read(short pID, int pBlock);
+	void createDisk(int pFileSize);
+	void showDisks();
+	void eraseDisk(short pID);
+	//int getDiskSize(short pID);
+	int getBlockSize(short pID);
+	void format(short pID, int pBlockSize);
+	short getFreeBlock(short pID);
+	void write(char* pData, short pID, int pBlock, int pOffset, int pSize);
+	char* read(short pID, int pBlock, int pOffset, int pSize);
 };
 
 #endif
