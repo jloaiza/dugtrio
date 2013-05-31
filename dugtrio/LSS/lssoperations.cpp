@@ -1,53 +1,30 @@
-#include "lssoperations.h"
-#include "lss.h"
+#include "Lssoperations.h"
 
-lssOperations::lssOperations()
-{
-	_disponibleID = 0;
-	_lss = new simpleList<lss>();
-}
-
-/**
- * crea un disco para almacenamiento
- * @param pFileSize tamaño del lss
- */
-void lssOperations::createDisk(int pFileSize)
-{
-	short * temp = new short();
-	*temp = _disponibleID;
-	_disponibleID++;
+std::string LssOperations::getFreeBlock(short pID, DoubleLinkedList<Lss, short>* pDiskList){
 	
-	lss temporalDisk( std::to_string(*temp).data(), *temp, pFileSize);
-	_lss->insertStart(temporalDisk);
-	
+	pDiskList->search()
 }
 
-/**
- * muestra los discos disponibles para almacenamiento
- */
-void lssOperations::showDisks()
-{
-	_lss->print();
+std::string LssOperations::connect(short pID, std::string pKey, DoubleLinkedList<Lss, short>* pDiskList){
+
 }
 
+std::string LssOperations::readBlock(short pID, int pBlock, DoubleLinkedList<Lss, short>* pDiskList){
 
-/**
- * borrar un disco
- * @param pID nombre del archivo(lss) en la computadora
- */
-void lssOperations::eraseDisk(short pID)
-{	
-	lss temporalDisk( std::to_string(pID).data(), pID, 0);
-	_lss->erase(temporalDisk);
 }
 
-/*
-void lssOperations::saveDisks(char* pXML){
-	
+std::string LssOperations::writeBlock(short pID, int pBlock, std::string pData, DoubleLinkedList<Lss, short>* pDiskList){
+
 }
 
+std::string LssOperations::writeBytes(short pID, int pBlock, int pOffset, int pSize, std::string pData, DoubleLinkedList<Lss, short>* pDiskList){
 
-void lssOperations::loadDisks(char* pXML){
-	
 }
-*/
+
+std::string LssOperations::readBytes (short pID, int pBlock, int pOffset, int pSize, DoubleLinkedList<Lss, short>* pDiskList){
+
+}
+
+std::string LssOperations::getLSSList(){
+
+}

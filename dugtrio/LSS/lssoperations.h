@@ -1,20 +1,24 @@
 
-#ifndef LSSOPERATIONS
-#define LSSOPERATIONS
+#ifndef LssOPERATIONS
+#define LssOPERATIONS
 
-class Lss;
+#include "lss.h"
+#include "../../structures/DoubleLinkedList.h"
+
 class SimpleList;
 
 class LssOperations {
 	
-protected:
-	SimpleList* _lss;
-	short _disponibleID;
 public:
-	lssOperations();
-	void createDisk(int pFileSize);
-	void showDisks();
-	void eraseDisk(short pFileName);
-};
 
+	static std::string getFreeBlock(short pID, DoubleLinkedList<Lss, short>* pDiskList);
+	static int getSize(short pID);
+	static std::string connect(short pID, std::string pKey, DoubleLinkedList<Lss, short>* pDiskList);
+	static std::string readBlock(short pID, int pBlock, DoubleLinkedList<Lss, short>* pDiskList);
+	static std::string writeBlock(short pID, int pBlock, std::string pData, DoubleLinkedList<Lss, short>* pDiskList);
+	static std::string writeBytes(short pID, int pBlock, int pOffset, int pSize, std::string pData, DoubleLinkedList<Lss, short>* pDiskList);
+	static std::string readBytes (short pID, int pBlock, int pOffset, int pSize, DoubleLinkedList<Lss, short>* pDiskList);
+	static std::string getLSSList();
+
+};
 #endif
