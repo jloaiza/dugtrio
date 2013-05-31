@@ -146,7 +146,6 @@ QDomElement parserxml::tourXML(std::string pDirection)
     while ((pos = completedirection.find(delimiter)) != std::string::npos) 
     {
         token = completedirection.substr(0, pos);
-        std::cout << token << std::endl;
         int numberchild = getPositionChild(token);
         std::string wordextract = wordTokenExtract(token);
         actualelement = actualelement.elementsByTagName(QString::fromStdString(wordextract)).at(numberchild).toElement();
@@ -157,12 +156,19 @@ QDomElement parserxml::tourXML(std::string pDirection)
 
 void parserxml::eraseAttribute(std::string pChildDirection, std::string pAttribute)
 {
-    QDomElement childadd = tourXML(pChildDirection);
-    childadd.removeAttribute(QString::fromStdString(pAttribute));
+    QDomElement childaux = tourXML(pChildDirection);
+    childaux.removeAttribute(QString::fromStdString(pAttribute));
 }
 
 void parserxml::changeValue(std::string pChildDirection, std::string pValue)
 {
-    QDomElement childadd = tourXML(pChildDirection);
-    childadd.setNodeValue(QString::fromStdString(pValue));
+    QDomElement childaux= tourXML(pChildDirection);
+    childaux.setNodeValue(QString::fromStdString(pValue));
+}
+
+void parserxml::eraseChild(std::string pFatherDirection, std::string pChildName)
+{
+    int index = getPositionChild(pChildName);
+    QDomElement childaux = tourXML(pFatherDirection);
+    childaux.removeChild(childaux.elementsByTagName(QString::fromStdString(pChildName)).at(index));
 }

@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
     prueba->createOtherChild("bugtraq/","AVEMARIA");
     prueba->createChildAttribute("Attribute3","3");
     prueba->createChildValue("FUNCIONA");
+    prueba->eraseChild("bugtraq/","AVEMARIA");
     prueba->updateDocument();
-    std::cout << prueba->obtainValue("/home/bugtraq/AVEMARIA/string()") << std::endl;
     prueba->tourXML("CHILD2[3]/");
     return app.exec();
 }
