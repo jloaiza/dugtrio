@@ -5,13 +5,13 @@
 #include <string>
 
 class SimpleList;
-class iFile;
+class Comparable;
 
 class nTreeNode {
 	
 private:
 	
-    iFile* _file;
+    Comparable* _file;
     SimpleList* _children;
 	
 public:
@@ -19,34 +19,29 @@ public:
     std::string name;
 
     /**
-     * @brief nTreeNode
-     * @param pFile
-     * @param pName
+     * @param pFile archivo que almacenará
+     * @param pUser usuario dueño del archivo o carpeta
      */
-    nTreeNode (iFile* pFile, std::string pName);
+    nTreeNode (Comparable* pPath, std::string pUser);
 	
     /**
-     * @brief addChild
-     * @param pNode
+     * agrega un hijo a la lista simple del nodo
+     * @param pNode nuevo nodo
      */
-    void addChild(iFile* pNode);
+    void addChild(nTreeNode pNode);
 
     /**
-     * @brief getChild
+     * retorna el hijo de un nodo
      * @return
      */
-    iFile* getChild(std::string pName);
+    nTreeNode* getChild(std::string pName);
+
+    //SimpleList* getChildrenList();
 
     /**
-     * @brief getChildrenList
-     * @return
-     */
-    SimpleList* getChildrenList();
-
-    /**
-     * @brief searchChild
-     * @param pName
-     * @return
+     * busca si existe un hijo del nodo
+     * @param pName nombre del hijo que se busca
+     * @return true si el hijo existe, false de lo contrario
      */
     bool searchChild(std::string pName);
 
