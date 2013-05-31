@@ -42,5 +42,5 @@ void nTreeNode::eraseChild(std::string pName)
 
 void nTreeNode::print()
 {
-    /** TODO **/
+	_file->print();
 }
