@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <iostream>
+#include <thread>
 
 /* Puerto  de la conexión. */
 #define PORT 9999
@@ -30,9 +31,17 @@ class NetworkHandler
         */
         NetworkHandler(); 
         /**
-        * Ciclo que mantiene el servidor corriendo a la espera de conexiones.
+        *Funcion para instanciar el server con uso de Thread.
         */
-        void Run(); 
+        void start();
+        /**
+        *Funcion get para obtener el Thread.
+        */
+        std::thread* getThread();
+        /**
+        *Variable Thread.
+        */
+        std::thread* _thread;
     protected:
         /**
          * Método que se implementará dentro de cualquier clase que herede.
@@ -56,6 +65,14 @@ class NetworkHandler
         void closeServer();
     private:
         /**
+        *Funcion estatica para correr el server como un Thread.
+        */
+        static void callRun(NetworkHandler* pHandler);
+        /**
+        * Ciclo que mantiene el servidor corriendo a la espera de conexiones.
+        */
+        void Run();
+        /**
         * @param pLoop: Mensaje de esperando conexión.
         */
         void WaitConnectionMsg(int pLoop);
@@ -75,7 +92,7 @@ class NetworkHandler
          * @param pIP
          * @return 
          */
-        int MeetClient(int pSocket, struct sockaddr_in pIP);
+        int MeetClient(int pSocket);
         /**
         * Verificar si hay algun nuevo cliente ingresando al servidor.
         */

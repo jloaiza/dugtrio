@@ -12,7 +12,7 @@ NetworkHandler::NetworkHandler()
     _sizeAddr = sizeof(struct sockaddr_in);
 }
 
-int NetworkHandler::MeetClient(int pSocket, sockaddr_in pIP)
+int NetworkHandler::MeetClient(int pSocket)
 {
     _runClient = 0; /* Verificador del ciclo. */   
     _exitCode = 0; /* Código de salida por defecto */         
@@ -105,7 +105,7 @@ void NetworkHandler::verifyNewClient()
                     break;
                 case 0:   
                     /* Somos un nuevo cliente. */                           
-                    _exit = MeetClient(_clientSocket, _clientIP);
+                    _exit = MeetClient(_clientSocket);
                     /* Se libera el cliente. */
                     exit(_exit); 
                 default:  
@@ -195,3 +195,20 @@ void NetworkHandler::Run()
     /* Se cierra el socket del servidor. */
     close(_serverSocket);
 }
+
+void NetworkHandler::callRun(NetworkHandler* pHandler)
+{
+    pHandler->Run();
+}
+
+void NetworkHandler::start()
+{
+    _thread = new std::thread(callRun, this);
+}
+
+std::thread* NetworkHandler::getThread()
+{
+    return _thread;
+}
+
+

@@ -1,11 +1,13 @@
 
 #include <cstdlib>
+#include <iostream>
 #include "test.h"
 
-int main(int argc, char** argv) 
+int main() 
 {
     NetworkHandler* Server = new Test();
-    Server->Run();
+    Server->start();
+    Server->getThread()->join(); 
     return 0;
 }
 
