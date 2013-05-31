@@ -6,27 +6,28 @@
 #include "simplelist.h"
 
 
-nTreeNode::nTreeNode(iFile* pFile, std::string pName)
+nTreeNode::nTreeNode(Comparable* pPath, std::string pUser)
 {
     name = pName;
     _file = pFile;
     _children = new SimpleList;
 }
 
-void nTreeNode::addChild(iFile* pNode)
+void nTreeNode::addChild(nTreeNode pNode)
 {
     _children->insert(pNode);
 }
 
 iFile* nTreeNode::getChild(std::string pName)
 {
-
-    /** TODO **/
+	_children->get(pName);
 }
 
+/*
 SimpleList* nTreeNode::getChildrenList(){
     return _children;
 }
+*/
 
 bool nTreeNode::searchChild(std::string pName)
 {
@@ -41,5 +42,5 @@ void nTreeNode::eraseChild(std::string pName)
 
 void nTreeNode::print()
 {
-    /** TODO **/
+	_file->print();
 }

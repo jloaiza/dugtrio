@@ -2,10 +2,10 @@
 #include "node.h"
 
 Node::Node(Comparable *pData) {
-    data = pData;
+    data = *pData;
     next = NULL;
 }
 
 void Node::print() {
-    data->print();
+    data.print();
 }
