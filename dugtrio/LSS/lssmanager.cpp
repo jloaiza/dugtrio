@@ -1,50 +1,97 @@
+#include <cstring>
 
-#include "lssmanager.h"
+#include "../../binaryoperations/byteshandler.h"
+#include "../structures/node.h"
 #include "lss.h"
+#include "lssmanager.h"
 
-lssManager::lssManager() { }
-
-/**
- * retorna el tamaño de un disco
- * @param pDiskID id del disco del cual queremos el tamaño
- * @return el tamaño del disco en bytes 
- */
-int LssManager::getDiskSize(short pDiskID)
-{
-	
-	Lss temporal(std::to_string(pDiskID).data(), pDiskID, 0);
-	
-	if ( _lss->search(temporal) )
-	{
-		temporal = _lss->get(temporal);
-		char * buffer = temporal.read(0);
-		std::string temp;
-		for(int x=0; x<4; x++)
-		{
-			temp+=buffer[12+x];
-		}
-		int z = BytesHandler::to_ulong(temp);
-	}
+LssManager::LssManager() 
+{ 
+	_lss = new SimpleList();
+	_disponibleID = 0;
+	_console = 0;
+	_networkHandler = 0;
 }
 
-/**
- * retorna un espacio libre en el disco (en caso de haber)
- * @param pDiskID id del disco del cual queremos un bloque
- * @return numero del bloque libre
- */
-short LssManager::getFreeBlock(short pDiskID)
+void LssManager::write(char* pData, short pID, int pBlock)
 {
-	lss temporal(std::to_string(pDiskID).data(), pDiskID, 0);
-	if ( _lss->search(temporal) )
-	{
-		temporal = _lss->get(temporal);
-		char * buffer = temporal.read(0);
-		std::string temp;
-		for(int x=0; x<2; x++)
-		{
-			temp+=buffer[2+x];
-		}
-		int z = BytesHandler::to_ulong(temp);
-	}
+	Lss* temporal = (Lss*)( _lss->get( std::to_string(pID).data() ) );
+	temporal->write(pData, pBlock);
+}
+
+char * LssManager::read(short pID, int pBlock)
+{
+	Lss* temporal = (Lss*)( _lss->get( std::to_string(pID).data() ) );
+	return temporal->read(pBlock);	
+}
 	
+void LssManager::createDisk(int pFileSize)
+{
+	short * temp = new short();
+	*temp = _disponibleID;
+	_disponibleID++;
+	Lss * temporal = new Lss(std::to_string(*temp).data(), *temp, pFileSize);
+	_lss->insert(temporal);
+}
+
+void LssManager::showDisks()
+{
+	_lss->print();
+}
+
+Lss* LssManager::getLSS(short pID){
+	return (Lss*)_lss->get( std::to_string(pID).data() );
+}
+
+void LssManager::eraseDisk(short pID)
+{
+	Lss * temporal = new Lss(std::to_string(pID).data(), pID, 0);
+	_lss->erase(temporal);
+}
+
+/*
+int LssManager::getDiskSize(short pID)
+{
+	Lss* temporal = (Lss*)( _lss->get( std::to_string(pID).data() ) );
+	return temporal->getDiskSize();
+}
+*/
+
+int LssManager::getBlockSize(short pID)
+{
+	Lss* temporal = (Lss*)( _lss->get( std::to_string(pID).data() ) );
+	return temporal->getBlockSize();
+}
+
+void LssManager::format(short pID, int pBlockSize)
+{
+	Lss* temporal = (Lss*)( _lss->get( std::to_string(pID).data() ) );
+	temporal->format(pBlockSize);
+}
+
+short LssManager::getFreeBlock(short pID)
+{
+	Lss* temporal = (Lss*)( _lss->get( std::to_string(pID).data() ) );
+	return temporal->getFreeBlock();
+}
+
+void LssManager::write(char* pData, short pID, int pBlock, int pOffset, int pSize)
+{
+	Lss* temporal = (Lss*)( _lss->get( std::to_string(pID).data() ) );
+	temporal->write(pData, pBlock, pOffset, pSize);
+}
+
+char* LssManager::read(short pID, int pBlock, int pOffset, int pSize)
+{
+	Lss* temporal = (Lss*)( _lss->get( std::to_string(pID).data() ) );
+	temporal->read(pBlock, pOffset, pSize);	
+}
+
+void LssManager::startSystem(){
+	_console = new LssConsole(this);
+	_networkHandler = new LSSNetworkHandler(this);
+	_console->start();
+	_networkHandler->start();
+	_console->getThread()->join();
+	_networkHandler->getThread()->join();
 }

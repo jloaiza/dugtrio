@@ -147,18 +147,3 @@ double BaseConverter::decimalsBin2double(std::string pBits){
 	}
 	return decimals;
 }
-
-// int main(){
-
-// 	// std::cout<<BaseConverter::snum2bin(-12, 8)<<std::endl;
-
-// 	// std::cout<<BaseConverter::snum2bin(-2147483640, 32)<<std::endl;
-// 	// std::cout<<BaseConverter::to_slong(BaseConverter::snum2bin(-2147483640, 32))<<std::endl;
-
-// 	// std::cout<<BaseConverter::decimals2bin(0.2123)<<std::endl;
-
-// 	std::cout<<BaseConverter::double2bin(-10.2123)<<std::endl;
-// 	std::cout<<"--------------------"<<std::endl;
-// 	std::cout<<BaseConverter::toDouble(BaseConverter::double2bin(-10.2123))<<std::endl;
-// 	return 0;
-// }

@@ -31,8 +31,6 @@ private:
 };
 
 
-#endif /* DOUBLELINKEDLIST */
-
 //--------------Definición de los métodos--------------------------------------
 
 template <class t, typename c>
@@ -170,3 +168,5 @@ t* DoubleLinkedList<t, c>::erase(c* pData){
 		return 0;
 	}
 }
+
+#endif /* DOUBLELINKEDLIST */
