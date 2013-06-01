@@ -1,0 +1,2 @@
+g++ -g -Wall -W -std=c++11 -pthread networkhandler.cpp test.cpp main.cpp -o EJECUTABLE && ./EJECUTABLE
+

@@ -25,12 +25,12 @@ char * LssManager::read(short pID, int pBlock)
 	return temporal->read(pBlock);	
 }
 	
-void LssManager::createDisk(int pFileSize)
+void LssManager::createDisk(int pFileSize, std::string pSecKey)
 {
 	short * temp = new short();
 	*temp = _disponibleID;
 	_disponibleID++;
-	Lss * temporal = new Lss(std::to_string(*temp).data(), *temp, pFileSize);
+	Lss * temporal = new Lss(std::to_string(*temp).data(), *temp, pFileSize, pSecKey);
 	_lss->insert(temporal);
 }
 
@@ -40,13 +40,18 @@ void LssManager::showDisks()
 }
 
 Lss* LssManager::getLSS(short pID){
-	return (Lss*)_lss->get( std::to_string(pID).data() );
+	return (Lss*)(_lss->get( std::to_string(pID).data() ));
 }
 
-void LssManager::eraseDisk(short pID)
+void LssManager::eraseDisk(short pID, std::string pSecKey)
 {
-	Lss * temporal = new Lss(std::to_string(pID).data(), pID, 0);
-	_lss->erase(temporal);
+	Lss * temporal = (Lss*)(_lss->get( std::to_string(pID).data() ));
+	if (temporal->getSecKey() == pSecKey){
+		_lss->erase(temporal);
+	} else {
+		std::cout<<"Security key incorrecto"<<std::endl;
+	}
+	
 }
 
 /*

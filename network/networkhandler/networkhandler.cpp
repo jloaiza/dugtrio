@@ -1,4 +1,3 @@
-
 #include "networkhandler.h"
 
 NetworkHandler::NetworkHandler()
@@ -13,12 +12,12 @@ NetworkHandler::NetworkHandler()
     _sizeAddr = sizeof(struct sockaddr_in);
 }
 
-int NetworkHandler::MeetClient(int pSocket, sockaddr_in pIP)
+int NetworkHandler::MeetClient(int pSocket)
 {
-    int run = 0; /* Verificador del ciclo. */   
-    int exitcode = 0; /* Código de salida por defecto */         
+    _runClient = 0; /* Verificador del ciclo. */   
+    _exitCode = 0; /* Código de salida por defecto */         
 
-    while (!run)
+    while (!_runClient)
     {
         /* Setear el buffer a cero. */
         memset(_inBuffer, 0, BUFFERSIZE);
@@ -30,34 +29,16 @@ int NetworkHandler::MeetClient(int pSocket, sockaddr_in pIP)
         if(_byteCount == 0)
         {
             std::cout << "!ATENCIÓN! El cliente " << inet_ntoa(_clientIP.sin_addr) <<  " se ha desconectado inesperadamente, conexión perdida." << std::endl;
-            run = 1;
+            _runClient = 1;
         }
         /* Se convierte el _inBuffer de char a string para un manejo más fácil. */
         std::string inMessageBuffer = _inBuffer;
-        
-        /* Evaluamos si el mensaje de entrada es disconnect o closeserver, de no ser así
-         * se envia a inMessage para su posterior evaluación.
-         */
-        
-        /* Comando "discconect", cierra la conexión actual del cliente. */
-        if (strncmp(_inBuffer, "disconnect", 10)==0)
-        { 
-            run = 1;
-        }
-        /* Comando "closeserver", cierra el servidor actual. */
-        else if (strncmp(_inBuffer, "closeserver", 11)==0)
-        {
-            run = 1;
-            exitcode = 99;        
-        }
-        /* Sino, se envia el mensaje a otro método para su posterior evaluación. */
-        else
-        {
-            inMessage(inMessageBuffer, pSocket);
-        }
+
+        /* Se envia el mensaje a otro método para su posterior evaluación. */
+        inMessage(inMessageBuffer, pSocket);
     }
     close(pSocket); /* Se cierra la conexión del cliente. */
-    return exitcode; /* Retorna el codigo de salida */
+    return _exitCode; /* Retorna el codigo de salida */
 }
 
 void NetworkHandler::outMessage(std::string pMessage, int pSocket)
@@ -124,7 +105,7 @@ void NetworkHandler::verifyNewClient()
                     break;
                 case 0:   
                     /* Somos un nuevo cliente. */                           
-                    _exit = MeetClient(_clientSocket, _clientIP);
+                    _exit = MeetClient(_clientSocket);
                     /* Se libera el cliente. */
                     exit(_exit); 
                 default:  
@@ -163,6 +144,22 @@ void NetworkHandler::verifyDeadClient()
     }  
 }
 
+std::string NetworkHandler::getClientIP()
+{
+    return inet_ntoa(_clientIP.sin_addr);
+}
+
+void NetworkHandler::disconnectClient()
+{
+    _runClient = 1;
+}
+
+void NetworkHandler::closeServer()
+{
+    _runClient = 1;
+    _exitCode = 99;
+}
+
 void NetworkHandler::Run()
 {  
     /* Se verifican los errores principales antes de levantar el servidor. */
@@ -198,3 +195,20 @@ void NetworkHandler::Run()
     /* Se cierra el socket del servidor. */
     close(_serverSocket);
 }
+
+void NetworkHandler::callRun(NetworkHandler* pHandler)
+{
+    pHandler->Run();
+}
+
+void NetworkHandler::start()
+{
+    _thread = new std::thread(callRun, this);
+}
+
+std::thread* NetworkHandler::getThread()
+{
+    return _thread;
+}
+
+

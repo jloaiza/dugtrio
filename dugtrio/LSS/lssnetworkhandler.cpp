@@ -146,7 +146,3 @@ void LSSNetworkHandler::readBytes(int pSocket, std::string pParam){
 void LSSNetworkHandler::defaultCase(int pSocket, std::string pCommand){
 	outMessage("?Error: El el comando '" + pCommand + "' no fue encontrado\n", pSocket);
 }
-
-int main(){
-	return 0;
-}

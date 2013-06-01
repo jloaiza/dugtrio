@@ -13,6 +13,7 @@ class LSSNetworkHandler : public NetworkHandler
 public:
 
 	LSSNetworkHandler(LssManager* pManager){
+		_lssList = new DoubleLinkedList<Lss, short>();
 		_manager = pManager;
 	}
 

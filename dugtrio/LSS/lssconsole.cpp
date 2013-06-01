@@ -1,17 +1,33 @@
 #include "lssconsole.h"
 #include "info.h"
 #include <iostream>
+#include <string>
+#include <termios.h>
+#include "../../md5/md5.h"
 
-inline void LssConsole::start(){
+void echo(bool pON);
+
+void LssConsole::start(){
 	_thread = new std::thread(callRun, this);
 }
 
-inline void LssConsole::stop(){
+void LssConsole::stop(){
 	_onRun = false;
 }
 
 void LssConsole::callRun(LssConsole* pConsole){
 	pConsole->run();
+}
+
+void echo(bool pON){
+	struct termios t;
+	tcgetattr(STDIN_FILENO, &t);
+	if (pON){
+		t.c_lflag |= ECHO;
+	} else {
+		t.c_lflag &= ~ECHO;
+	}
+	tcsetattr(STDIN_FILENO, TCSANOW, &t);
 }
 
 void LssConsole::run(){
@@ -26,8 +42,18 @@ void LssConsole::run(){
 		{
 			int fileSize;
 			std::cout << SIZE1;
-			std::cin >> fileSize;		
-			_diskManager->createDisk(fileSize);		
+			std::cin >> fileSize;
+
+			std::cout << PASS;
+			std::string secKey;
+			echo(false);
+			std::cin >> secKey;
+			echo(true);
+			secKey = md5(secKey);
+
+			std::cout<<secKey<<std::endl;
+
+			_diskManager->createDisk(fileSize, secKey);
 		}
 		 
 		else if (clave == 2)
@@ -35,7 +61,17 @@ void LssConsole::run(){
 			short fileName;
 			std::cout << NAME;
 			std::cin >> fileName;
-			_diskManager->eraseDisk(fileName);
+
+			std::cout << PASS;
+			std::string secKey;
+			echo(false);
+			std::cin >> secKey;
+			echo(true);
+			secKey = md5(secKey);
+
+			std::cout<<std::endl;
+
+			_diskManager->eraseDisk(fileName, secKey);
 		}
 		
 		else if (clave == 3)

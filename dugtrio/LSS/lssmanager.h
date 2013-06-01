@@ -6,6 +6,9 @@
 #include "lssnetworkhandler.h"
 #include "lss.h"
 
+class LssConsole;
+class LSSNetworkHandler;
+
 class LssManager{
 	
 private:
@@ -19,9 +22,9 @@ public:
 	Lss* getLSS(short pID);
 	void write(char* pData, short pID, int pBlock);
 	char* read(short pID, int pBlock);
-	void createDisk(int pFileSize);
+	void createDisk(int pFileSize, std::string pSecKey);
 	void showDisks();
-	void eraseDisk(short pID);
+	void eraseDisk(short pID, std::string pSecKey);
 	int getDiskSize(short pDiskID);
 	int getBlockSize(short pID);
 	void format(short pID, int pBlockSize);

@@ -14,5 +14,6 @@ const char * lssmenu9 = "*       6. Salir                   *";
 const char * NAME = "nombre del disco (archivo real): ";
 const char * NAME2 = "nombre del xml: ";
 const char * SIZE1 = "tamaño del disco (bytes): ";
+const char * PASS = "security key: ";
 
 #endif 

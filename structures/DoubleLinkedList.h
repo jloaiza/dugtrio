@@ -98,17 +98,27 @@ void DoubleLinkedList<t, c>::insertDecrecient(t* pData){
 template <class t, typename c>
 void DoubleLinkedList<t, c>::insertStart(t* pData){
 	ListNode<t>* newNode = new ListNode<t>(pData);
-	newNode->setNext(_head);
-	_head->setPrevious(newNode);
-	_head = newNode;
+	if (_head == 0){
+		_head = _tail = newNode;
+	} else {
+		newNode->setNext(_head);
+		_head->setPrevious(newNode);
+		_head = newNode;
+	}
+	
 }
 
 template <class t, typename c>
 void DoubleLinkedList<t, c>::insertEnd(t* pData){
 	ListNode<t>* newNode = new ListNode<t>(pData);
-	newNode->setPrevious(_tail);
-	_tail->setNext(newNode);
-	_tail = newNode;
+	if (_head == 0){
+		_head = _tail = newNode;
+	} else {
+		newNode->setPrevious(_tail);
+		_tail->setNext(newNode);
+		_tail = newNode;
+	}
+	
 }
 
 template <class t, typename c>
@@ -145,11 +155,27 @@ template <class t, typename c>
 t* DoubleLinkedList<t, c>::erase(t* pDataDummy){
 	ListNode<t>* toErase = searchAux(pDataDummy);
 	if (toErase != 0){
-		toErase->getPrevious()->setNext(toErase->getNext());
-		toErase->getNext()->setPrevious(toErase->getPrevious);
-		t* tmp;
+
+		if (_head == _tail && toErase == _head){
+			_head = _tail = 0;
+			
+		} else if (toErase == _head){
+			toErase->getNext()->setPrevious(0);
+			_head = toErase->getNext();
+
+		} else if (toErase == _tail){
+			toErase->getPrevious()->setNext(0);
+			_tail = toErase->getPrevious();
+
+		} else {
+			toErase->getPrevious()->setNext(toErase->getNext());
+			toErase->getNext()->setPrevious(toErase->getPrevious);
+		}
+
+		t* tmp = toErase->getData();
 		delete toErase;
-		return tmp->getData();
+		return tmp;
+			
 	} else{
 		return 0;
 	}
@@ -159,11 +185,27 @@ template <class t, typename c>
 t* DoubleLinkedList<t, c>::erase(c* pData){
 	ListNode<t>* toErase = searchAux(pData);
 	if (toErase != 0){
-		toErase->getPrevious()->setNext(toErase->getNext());
-		toErase->getNext()->setPrevious(toErase->getPrevious);
-		t* tmp;
+
+		if (_head == _tail && toErase == _head){
+			_head = _tail = 0;
+			
+		} else if (toErase == _head){
+			toErase->getNext()->setPrevious(0);
+			_head = toErase->getNext();
+
+		} else if (toErase == _tail){
+			toErase->getPrevious()->setNext(0);
+			_tail = toErase->getPrevious();
+
+		} else {
+			toErase->getPrevious()->setNext(toErase->getNext());
+			toErase->getNext()->setPrevious(toErase->getPrevious);
+		}
+
+		t* tmp = toErase->getData();
 		delete toErase;
-		return tmp->getData();
+		return tmp;
+			
 	} else{
 		return 0;
 	}

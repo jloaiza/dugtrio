@@ -65,6 +65,7 @@ Comparable* SimpleList::get(std::string pName)
         {
             return iterNode->data;
         }
+        iterNode = iterNode->next;
     }
     return 0;
 }

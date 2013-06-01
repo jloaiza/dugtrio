@@ -3,9 +3,12 @@
 #include <string>
 #include <cstring>
 
+#include <iostream>
+
 std::string LssOperations::getFreeBlock(short pID, DoubleLinkedList<Lss, short>* pDiskList){
 
 	Lss* lss = pDiskList->search(&pID);
+	
 	if (lss != 0){
 		return std::to_string(lss->getFreeBlock());
 	} else {
@@ -16,12 +19,15 @@ std::string LssOperations::getFreeBlock(short pID, DoubleLinkedList<Lss, short>*
 
 std::string LssOperations::connect(short pID, std::string pKey, DoubleLinkedList<Lss, short>* pDiskList, LssManager* pManager){
 
-	//REVISAR SEGURIDAD
-
 	Lss* lss = pManager->getLSS(pID);
-	if (lss != 0){
+
+	if (lss->getSecKey() != pKey){
+		return "?Error: Security key incorrecta";
+
+	} else if (lss != 0){
 		pDiskList->insertStart(lss);
-		return "";
+		return "+connected";
+
 	} else {
 		return "?Error: El disco no ha sido encontrado";
 	}
@@ -50,10 +56,13 @@ std::string LssOperations::writeBlock(short pID, int pBlock, std::string pData, 
 }
 
 std::string LssOperations::writeBytes(short pID, int pBlock, int pOffset, int pSize, std::string pData, DoubleLinkedList<Lss, short>* pDiskList){
+	std::cout<<"H-1"<<std::endl;
 	Lss* toWrite = pDiskList->search(&pID);
+	std::cout<<"H-2"<<std::endl;
 	if (toWrite != 0){
-		char* tmp;
+		char* tmp = new char[pData.length()];
 		strcpy(tmp, pData.data());
+		std::cout<<"H"<<std::endl;
 		toWrite->write(tmp, pBlock, pOffset, pSize);
 		return "";
 	} else {
@@ -83,8 +92,4 @@ std::string LssOperations::getSize(short pID, LssManager* pManager){
 	} else {
 		return "?Error: El disco no ha sido encontrado";
 	}
-}
-
-int main(){
-	return 0;
 }

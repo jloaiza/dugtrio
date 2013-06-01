@@ -1,0 +1,2 @@
+g++ -m64 -pipe -g -Wall -W -D_REENTRANT -DQT_WEBKIT -DQT_SVG_LIB -DQT_XMLPATTERNS_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -lQtSvg -lQtXmlPatterns -lQtXml -lQtGui -lQtCore -lpthread -I/usr/include/qt4/QtCore -I/usr/include/qt4/QtGui -I/usr/include/qt4/QtXml -I/usr/include/qt4/QtXmlPatterns -I/usr/include/qt4/QtSvg -I/usr/include/qt4 main.cpp parserxml.cpp -o EJECUTABLE && ./EJECUTABLE
+

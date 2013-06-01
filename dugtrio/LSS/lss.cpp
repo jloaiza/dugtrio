@@ -37,7 +37,7 @@ bool Lss::operator >= (const short& pToCompare){
  * @param pID nombre del lss, para comparaciones
  * @param pSize tamaño maximo del disco;
  */
-Lss::Lss(const char * pDisk, short pID, int pSize)
+Lss::Lss(const char * pDisk, short pID, int pSize, std::string pSecKey)
 {
 	char * temp = new char();
 	std::strcpy(temp, pDisk);
@@ -47,6 +47,7 @@ Lss::Lss(const char * pDisk, short pID, int pSize)
 	_id = pID;
 	_size = pSize;
 	_blockSize = 12;
+	_secKey = pSecKey;
 	header();
 }
 
@@ -109,6 +110,10 @@ int Lss::getFreeBlock()
 	return tmp2;
 }
 
+std::string Lss::getSecKey(){
+	return _secKey;
+}
+
 
 void Lss::eraseBlock(int pBlock)
 {
@@ -142,11 +147,14 @@ void Lss::format(int pBlockSize)
  */
 void Lss::write(char* pText, int pBlock, int pOffset, int pSize)
 {
+	std::cout<<"H1"<<std::endl;
 	/* abre el archivo */
 	std::fstream File;
 	File.open(_disk);
 	/* mueve el puntero al final para verificar el tamaño del archivo */
+	std::cout<<"H2"<<std::endl;
 	File.seekp ( 12*(pBlock)+pOffset, File.beg);
+	std::cout<<"H3"<<std::endl;
 	File.write (pText, pSize);
 	File.close();
 }

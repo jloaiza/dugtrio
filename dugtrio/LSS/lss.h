@@ -2,6 +2,7 @@
 #define LSS
 
 #include "../comparable.h"
+#include <string>
 
 class Lss : public Comparable {
 	
@@ -11,14 +12,16 @@ private:
 	int _size;
 	int _blockSize;
 	short _id;
+	std::string _secKey;
 	char *read(int pPos, int pSize);
 	void write(int pPos, int pSize, char* pData);
 	void header();
 public:
-    Lss(const char*  pDisk, short pID, int pSize);
+    Lss(const char*  pDisk, short pID, int pSize, std::string pSecKey);
 	void write(char* pText, int pBlock);
 	char * read(int pBlock);
 	int getFreeBlock();
+	std::string getSecKey();
 	void eraseBlock(int pBlock);
 	int getBlockSize();
 	void format(int pBlockSize);
