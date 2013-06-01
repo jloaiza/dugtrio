@@ -26,6 +26,7 @@ bool SimpleList::search(std::string pName)
         {
             return true;
         }
+        iterNode = iterNode->next;
     }
     return false;
 }
